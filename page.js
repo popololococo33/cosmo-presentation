@@ -202,7 +202,7 @@
 
   // ---- Lueurs du fond (WebGL, sans bibliothèque)
   var dessiner = (function () {
-    var c = $("#lueurs"), gl = c.getContext("webgl", { antialias: false, alpha: false }); if (!gl) return function () {};
+    var c = $("#lueurs"), gl = c.getContext("webgl", { antialias: false, alpha: true }); if (!gl) return function () {};
     var sh = function (ty, x) { var o = gl.createShader(ty); gl.shaderSource(o, x); gl.compileShader(o); return o; };
     var pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, "attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}"));
     gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, "precision mediump float;uniform vec2 r;uniform float t,k;float g(vec2 p,vec2 c,float s){vec2 d=p-c;return exp(-dot(d,d)/(s*s));}void main(){vec2 p=gl_FragCoord.xy/r;float a=r.x/r.y;p.x*=a;vec3 c=vec3(.985,.988,.996);c=mix(c,vec3(.70,.82,1.),.62*k*g(p,vec2(a*(.18+.08*sin(t*.21)),.72+.1*cos(t*.17)),.46));c=mix(c,vec3(.86,.80,1.),.55*k*g(p,vec2(a*(.84+.06*cos(t*.19)),.3+.12*sin(t*.23)),.5));c=mix(c,vec3(.74,.93,.98),.5*k*g(p,vec2(a*(.52+.12*sin(t*.13)),.02+.08*cos(t*.2)),.42));c+=(fract(sin(dot(gl_FragCoord.xy,vec2(12.9,78.2)))*43758.5)-.5)/200.;gl_FragColor=vec4(c,1.);}"));
@@ -216,20 +216,22 @@
   // ---- Boucle
   var barre = $("#barre"), temps0 = $("#temps"), chapitres = ["vente", "administration", "direction"], force = false;
   function image(ms) {
+    requestAnimationFrame(image);
+    if (innerHeight < 60 || innerWidth < 60) return;
+    if (innerHeight !== H && !petit || innerWidth !== L || H < 60) mesurer();
     var y = scrollY, temps = ms / 1000;
     scenes.forEach(function (s) {
-      s.cible = borne((y - s.haut + H * .5) / s.course);
+      s.cible = borne((y - s.haut + H * .5) / s.course) || 0; if (!isFinite(s.p)) s.p = s.cible;
       var d = s.cible - s.p; s.p = calme || force || Math.abs(d) < .0004 ? s.cible : s.p + d * .16;
       var proche = y + H * 1.2 > s.haut && y < s.haut + s.el.offsetHeight + H * .2;
       if (!proche && s.vu === s.p) return;
-      if (s.vu !== s.p || proche && (s.nom === "constat" || s.nom === "tri" || s.nom === "fin")) { appliquer(s, s.p); if (jeux[s.nom]) jeux[s.nom](s, s.p, temps); s.vu = s.p; }
+      if (s.vu !== s.p || proche && (s.nom === "constat" || s.nom === "tri" || s.nom === "fin")) { s.vu = s.p; try { appliquer(s, s.p); if (jeux[s.nom]) jeux[s.nom](s, s.p, temps); } catch (e) { s.vu = null; } }
     });
     leFil(y);
     var mil = y + 40, sombre = false, bsombre = false, ch = -1, n;
     scenes.forEach(function (s) { var r = mil >= s.haut && mil < s.haut + s.el.offsetHeight, rb = y + H - 40 >= s.haut && y + H - 40 < s.haut + s.el.offsetHeight; if (s.el.classList.contains("nuit")) { if (r) sombre = true; if (rb) bsombre = true; } n = chapitres.indexOf(s.el.id); if (n >= 0 && y + H * .5 >= s.haut) ch = n; });
     barre.classList.toggle("sombre", sombre); fil.classList.toggle("sombre", bsombre); var tx = ch < 0 ? "" : ["Temps 1 · Vendre", "Temps 2 · Administrer", "Temps 3 · Piloter"][ch]; if (temps0.textContent !== tx) temps0.textContent = tx;
     dessiner(temps, y < H * 6 ? 1 : .55);
-    requestAnimationFrame(image);
   }
 
   // ---- Télécommande, flèches, menu
@@ -268,6 +270,6 @@
   mesurer(); var dl = innerWidth, dh = innerHeight;
   addEventListener("resize", function () { if (innerWidth === dl && Math.abs(innerHeight - dh) < 120 && innerWidth <= 820) return; dl = innerWidth; dh = innerHeight; mesurer(); });
   addEventListener("load", mesurer);
-  window.pilot = { scenes: scenes, aller: function (id, p) { var s = scenes.find(function (x) { return x.el.id === id; }); force = true; scrollTo(0, versY(s, p)); }, arrets: arrets };
+  window.pilot = { scenes: scenes, aller: function (id, p) { var s = scenes.find(function (x) { return x.el.id === id; }); force = true; doigt = true; cancelAnimationFrame(vol); vol = null; scrollTo(0, versY(s, p)); }, arrets: arrets };
   requestAnimationFrame(image);
 })();
