@@ -158,10 +158,10 @@
   jeux.fe = function (s, p) {
     var pa = $("#fe-lum"), lt = pa.getTotalLength(), aller = doux(t(p, .12, .46)), ret = doux(t(p, .56, .86)), q = p < .52 ? aller : 1 - ret, pt = pa.getPointAtLength(lt * q);
     var sv = $("#reseau-svg"), m = sv.getScreenCTM(), box = $(".reseau").getBoundingClientRect(), pli = $("#pli");
-    if (m) pli.style.transform = "translate3d(" + (pt.x * m.a + m.e - box.left) + "px," + (pt.y * m.d + m.f - box.top) + "px,0) rotate(" + Math.sin(q * 9) * 7 + "deg)";
+    if (m) pli.style.transform = "translate3d(" + (pt.x * m.a + m.e - box.left) + "px," + (pt.y * m.d + m.f - box.top - 84 * Math.pow(Math.abs(2 * q - 1), 6)) + "px,0) rotate(" + Math.sin(q * 9) * 7 + "deg)";
     pli.style.opacity = t(p, .08, .13) * (1 - t(p, .84, .88)) * (1 - Math.sin(Math.PI * t(p, .48, .56)));
     pa.style.strokeDashoffset = p < .52 ? 1 - aller : -(0) + (1 - 1) ; pa.style.opacity = p < .52 ? 1 : 1 - .6 * ret;
-    $("#fe-autre").textContent = p < .52 ? "Votre client" : "Votre fournisseur";
+    $("#fe-autre").textContent = p < .52 ? "Le client" : "Le fournisseur";
   };
   function monte(id, a, b, c) { return function (s, p) { var f = $(id + " .fenetre"), e = expo(t(p, a, b)); f.style.opacity = t(p, a, a + .06); f.style.transform = "translate3d(0," + mix(H * .5, 0, e) + "px,0) rotateX(" + mix(34, 0, e) + "deg) scale(" + mix(.9, 1, e) + ")"; rai(f, t(p, b - .05, c || b + .25)); }; }
   var mb = monte("#f-banque", .58, .84, 1), mr = monte("#f-relances", .46, .82, 1);
@@ -230,7 +230,7 @@
     leFil(y);
     var mil = y + 40, sombre = false, bsombre = false, ch = -1, n;
     scenes.forEach(function (s) { var r = mil >= s.haut && mil < s.haut + s.el.offsetHeight, rb = y + H - 40 >= s.haut && y + H - 40 < s.haut + s.el.offsetHeight; if (s.el.classList.contains("nuit")) { if (r) sombre = true; if (rb) bsombre = true; } n = chapitres.indexOf(s.el.id); if (n >= 0 && y + H * .5 >= s.haut) ch = n; });
-    barre.classList.toggle("sombre", sombre); fil.classList.toggle("sombre", bsombre); var tx = ch < 0 ? "" : ["Temps 1 · Vendre", "Temps 2 · Administrer", "Temps 3 · Piloter"][ch]; if (temps0.textContent !== tx) temps0.textContent = tx;
+    barre.classList.toggle("sombre", sombre); fil.classList.toggle("sombre", bsombre); var tx = ch < 0 ? "" : ["Partie 1 · La vente", "Partie 2 · L’administration", "Partie 3 · La direction"][ch]; if (temps0.textContent !== tx) temps0.textContent = tx;
     dessiner(temps, y < H * 6 ? 1 : .55);
   }
 
