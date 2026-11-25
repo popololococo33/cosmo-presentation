@@ -249,3 +249,5 @@ h1{font-size:clamp(38px,6.1vw,92px)}
 
 .phrase.bas{margin-top:1.75em}
 .date b{font-size:clamp(20px,2.1vw,31px)}
+
+.groupe svg{width:28px;height:28px;color:var(--bleu)}.groupe{border:0;background:#fff;box-shadow:0 0 0 1px rgba(15,23,42,.07),0 28px 60px -30px rgba(23,50,120,.45)}

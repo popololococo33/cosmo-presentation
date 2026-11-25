@@ -18,8 +18,8 @@
   function noms() {
     var h = decodeURIComponent((location.hash || "").replace(/^#/, "")).split("/").map(function (x) { return x.trim().slice(0, 40); });
     if (!h[0] || (doc.getElementById(h[0]) && h.length < 2)) return;
-    var v = { groupe: h[0], societe: h[1] || h[0] };
-    $$("[data-nom]").forEach(function (e) { e.textContent = v[e.dataset.nom]; });
+    var v = { groupe: h[0], societe: h[1] || h[0], societe2: h[2], societe3: h[3] };
+    $$("[data-nom]").forEach(function (e) { if (v[e.dataset.nom]) e.textContent = v[e.dataset.nom]; });
   }
   try { noms(); } catch (e) { /* lien illisible : noms génériques */ }
   addEventListener("hashchange", function () { try { noms(); } catch (e) {} });
