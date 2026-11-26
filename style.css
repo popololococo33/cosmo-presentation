@@ -358,3 +358,12 @@ h1{font-size:clamp(38px,6.1vw,92px)}
 #ensemble .dit h2{font-size:clamp(28px,3vw,46px)}
 .tuiles-cl b{font-size:13.5px}
 @media (max-width:820px){.coffre span{display:none}#societes .grand{font-size:28px}.groupe{padding:10px 14px;font-size:14px}}
+
+.reel{position:absolute;left:50%;top:50%;width:min(1120px,92%,calc((100vh - 300px)*1.6))}#rch2{position:absolute;left:50%;top:50%;width:min(1120px,92%,calc((100vh - 300px)*1.6))}#rch2 .fenetre{opacity:0}
+.e.img{padding:0;background:#f3f6fc}.e.img img{width:100%;height:100%;object-fit:cover;object-position:top}
+@media (max-width:820px){.reel,#rch2{width:100%}}
+
+.centre-schema{transform:none;translate:-50% -50%}
+.reel .fenetre img,#rch2 .fenetre img{will-change:transform}
+.reel,#rch2{width:min(1120px,92%,calc((100vh - 230px)*1.6))!important}
+@media (max-width:820px){.reel,#rch2{width:100%!important}}

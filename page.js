@@ -126,15 +126,24 @@
   };
   // 02 : la recherche, puis Word et Excel depuis le dossier
   jeux.recherche = function (s, p) {
-    var f = $("#rch .fenetre"), e = expo(t(p, .02, .14)), z = doux(t(p, .46, .58)), d = doux(t(p, .78, .9)), tp = $("#tape"), mot = "Martin", n = Math.round(mot.length * t(p, .56, .66));
+    var f = $("#rch .fenetre"), e = expo(t(p, .02, .14)), z = 0, d = doux(t(p, .78, .9));
     f.style.transformOrigin = "43% 8%"; f.style.transform = "translate3d(0," + mix(H * .3, 0, e) + "px,0) rotateX(" + mix(24, 0, e) + "deg) scale(" + mix(1, petit ? 2.6 : 2, z) + ")";
     f.style.opacity = t(p, .02, .06) * (1 - .9 * d); f.style.filter = d > 0 ? "blur(" + (6 * d).toFixed(1) + "px)" : "";
-    tp.textContent = mot.slice(0, n) || ""; tp.style.opacity = n ? 1 : 0;
+    var r2 = $("#rch2 .fenetre"), x2 = doux(t(p, .48, .58)); $("#rch2").style.transform = "translate(-50%,-50%)"; r2.style.opacity = x2 * (1 - .9 * d); zoomer($("#rch2"), doux(t(p, .58, .7)) * (1 - d)); r2.style.filter = f.style.filter; f.style.opacity = t(p, .02, .06) * (1 - x2);
     var w = $("#docword"); w.style.opacity = d; w.style.transform = "translate(-50%,-50%) translate3d(0," + mix(80, 0, d) + "px,0) scale(" + mix(.9, 1, d) + ")";
     $("#rch").style.transform = "translate(-50%,-50%)";
   };
   // 03 : l'appel entrant
   jeux.client = function (s, p, temps) { var a = $("#appel"); a.style.opacity = t(p, .1, .14) * (1 - t(p, .3, .36)); a.style.transform = "scale(" + (1 + .05 * Math.sin(temps * 6) * (p < .3 ? 1 : 0)) + ")"; };
+  // Deux vraies captures l'une après l'autre
+  jeux.duoreel = function (s, p) {
+    var f = $$(".reel", s.plateau); if (f.length < 2) return; var a = $(".fenetre", f[0]), b2 = $(".fenetre", f[1]), e = expo(t(p, .02, .14)), x = doux(t(p, .5, .62));
+    f.forEach(function (w) { w.style.transform = "translate(-50%,-50%)"; });
+    a.style.opacity = t(p, .02, .06) * (1 - x); a.style.transform = "translate3d(" + (-60 * x) + "px," + mix(H * .3, 0, e) + "px,0) rotateX(" + mix(24, 0, e) + "deg) scale(" + mix(1, .94, x) + ")";
+    b2.style.opacity = x; b2.style.transform = "translate3d(" + mix(60, 0, x) + "px,0,0) scale(" + mix(.94, 1, x) + ")";    zoomer(f[0], doux(t(p, .2, .36)) * (1 - x)); zoomer(f[1], doux(t(p, .7, .84)));
+  };
+  // Zoom sur la zone utile d'une capture, dans son cadre (data-zoom="x% y% échelle")
+  function zoomer(w, q) { var z = (w.dataset.zoom || "").split(" "), im = $("img", w); if (z.length < 3 || !im) return; im.style.transformOrigin = z[0] + "% " + z[1] + "%"; im.style.transform = "scale(" + mix(1, +z[2], q).toFixed(3) + ")"; }
   // 04 : le téléphone, puis la photo qui rejoint le dossier
   jeux.poche = function (s, p) {
     var ec = p < .34 ? "e1" : p < .56 ? "e2" : p < .78 ? "e3" : "e4"; $$(".e", s.plateau).forEach(function (e) { e.classList.toggle("vu", e.id === ec); });
