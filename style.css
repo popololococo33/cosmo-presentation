@@ -397,3 +397,23 @@ h1{font-size:clamp(38px,6.1vw,92px)}
 .sommaire.ouvert~main .fil,.sommaire.ouvert~.fil{opacity:0!important}
 @media (max-width:820px){.dock{gap:2px;padding:8px;max-width:96vw;overflow-x:auto}.puce{width:52px}.pastille{width:36px;height:36px;font-size:13px}.nomc{font-size:9.5px}.puce{transform:none}}
 body.dock-ouvert .fil{opacity:0!important}
+
+/* ---- Tout part des mails ---- */
+.flux{position:relative;flex:1;min-height:0;width:min(1180px,100%)}
+.flux-liens{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.flux-liens path{fill:none;stroke:#9ab6f2;stroke-width:2}
+.boite{position:absolute;left:42%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:clamp(110px,11vw,150px);height:clamp(110px,11vw,150px);border-radius:34px;background:var(--bleu);color:#fff;z-index:2}
+.boite svg{width:56%;height:56%;stroke-width:1.4}.boite b{position:absolute;right:-10px;top:-10px;min-width:38px;height:38px;padding:0 8px;display:grid;place-items:center;border-radius:99px;background:var(--ambre);color:#fff;font-size:17px;box-shadow:0 0 0 4px #fff}
+.mail-vol{position:absolute;left:0;top:0;z-index:3;display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;background:#fff;font-weight:600;font-size:clamp(13px,1.15vw,16px);white-space:nowrap;box-shadow:0 0 0 1px rgba(15,23,42,.07),0 16px 34px -18px rgba(23,50,120,.5)}.mail-vol svg{width:18px;height:18px;color:var(--bleu)}
+.sorties,.envois{position:absolute;right:0;top:50%;transform:translateY(-50%);display:grid;gap:clamp(8px,1.6vh,16px);width:min(330px,34%)}
+.sorties span,.envois span{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:14px;background:#fff;font-weight:650;font-size:clamp(14px,1.3vw,19px);box-shadow:0 0 0 1px rgba(15,23,42,.07),0 18px 40px -22px rgba(23,50,120,.5);opacity:0}
+.sorties svg,.envois svg{width:22px;height:22px;color:var(--bleu)}
+.envois{right:0}.envois span{background:#ecfdf5;color:#065f46;box-shadow:0 0 0 1px #a7f3d0}.envois svg{color:var(--vert)}
+@media (max-width:820px){.boite{left:30%}.sorties{width:56%}.envois{width:56%}.mail-vol{font-size:11px;padding:6px 9px}}
+
+/* ---- La base de tout : le devis ---- */
+.base{position:relative;flex:1;min-height:0;width:min(1100px,100%);display:grid;place-items:center;perspective:1400px}
+.base .feuille{grid-area:1/1;width:min(400px,80%)}
+.coches{position:absolute;left:50%;top:50%;margin-left:clamp(200px,23vw,330px);display:grid;gap:10px;width:max-content}
+.coches li{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:12px;background:#ecfdf5;color:#065f46;font-weight:650;font-size:clamp(15px,1.4vw,20px);box-shadow:0 0 0 1px #a7f3d0}.coches svg{width:20px;height:20px;stroke-width:3}
+.tampon.pret{left:auto;right:22px;bottom:16px;rotate:-8deg}
+@media (max-width:820px){.coches{margin-left:0;left:auto;right:0;transform:none!important;top:auto;bottom:0}.coches li{font-size:13px;padding:6px 10px}}

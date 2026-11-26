@@ -120,6 +120,37 @@
     c.style.opacity = v > 0 ? 1 : 0; c.style.transform = "scale(" + (v > 0 ? bond(v) : 0).toFixed(3) + ")";
   };
 
+  // 02 : tout part des mails, puis tout repart par mail
+  var vols2 = null;
+  jeux.mails = function (s, p, temps) {
+    var fx = $("#flux"), W = fx.offsetWidth, Hh = fx.offsetHeight, bx = $("#boite"), cx = bx.offsetLeft + bx.offsetWidth / 2, cy = bx.offsetTop + bx.offsetHeight / 2;
+    if (!vols2) { vols2 = []; var sujets = ["Demande de devis", "Facture fournisseur", "Bon de livraison", "Plan du chantier", "Confirmation de commande", "Question d’un client", "Devis signé", "Relevé de compte"];
+      sujets.forEach(function (t, i) { var e = doc.createElement("div"); e.className = "mail-vol"; e.innerHTML = '<svg><use href="#i-mail"/></svg><span></span>'; e.lastChild.textContent = t; fx.appendChild(e); vols2.push(e); }); }
+    var recus = 0;
+    vols2.forEach(function (e, i) {
+      var d = .02 + i * .012, q = doux(t(p, .24 + i * .014, .32 + i * .014)), y0 = Hh * (.04 + i * .115), x0 = W * ((petit ? .0 : .02) + (i % 2) * (petit ? .18 : .12));
+      var x = mix(x0 + 20 * Math.sin(temps * .8 + i), cx - e.offsetWidth / 2, q), y = mix(y0, cy - e.offsetHeight / 2, q);
+      e.style.transform = "translate3d(" + x.toFixed(1) + "px," + y.toFixed(1) + "px,0) scale(" + mix(1, .4, q) + ")"; e.style.opacity = t(p, d - .03, d) * (1 - t(q, .85, 1));
+      if (q >= 1) recus++;
+    });
+    $("#boite-n").textContent = recus; bx.style.boxShadow = "0 0 " + (50 + 20 * Math.sin(temps * 2)) + "px " + (recus ? 8 : 0) + "px rgba(70,120,255,.45)";
+    var so = $$("#sorties span"), en = $$("#envois span"), liens = "";
+    so.forEach(function (e, i) { var q = expo(t(p, .34 + i * .03, .42 + i * .03)); e.style.opacity = q; e.style.transform = "translate3d(" + mix(-40, 0, q) + "px,0,0)";
+      if (q > .9) { var r = e.getBoundingClientRect(), f = fx.getBoundingClientRect(); liens += '<path d="M' + cx + " " + cy + " C" + (cx + 90) + " " + cy + " " + (r.left - f.left - 90) + " " + (r.top - f.top + r.height / 2) + " " + (r.left - f.left - 6) + " " + (r.top - f.top + r.height / 2) + '"/>'; } });
+    en.forEach(function (e, i) { var q = expo(t(p, .7 + i * .045, .8 + i * .045)); e.style.opacity = q; e.style.transform = "translate3d(" + mix(-60, 0, q) + "px," + mix(20, 0, q) + "px,0) scale(" + mix(.8, 1, q) + ")"; });
+    var sortie = t(p, .62, .68); $("#sorties").style.opacity = 1 - sortie; $("#flux-liens").style.opacity = 1 - .7 * sortie;
+    var fl = $("#flux-liens"); fl.setAttribute("viewBox", "0 0 " + W + " " + Hh); fl.innerHTML = liens;
+  };
+
+  // 06 : le devis vérifié devient la facture, à l'identique
+  jeux.base = function (s, p) {
+    var d = $("#bd"), f = $("#bf"), co = $("#coches"), e = expo(t(p, .02, .12)), m = doux(t(p, .46, .66)), w = d.offsetWidth, ecart = petit ? 0 : w * .62;
+    d.style.opacity = t(p, .02, .06); d.style.transform = "translate3d(" + (-ecart * m) + "px," + mix(60, 0, e) + "px,0)";
+    co.style.opacity = 1 - t(p, .42, .5); co.style.transform = "translate(-50%,-50%) translate3d(" + mix(0, 40, m) + "px,0,0)";
+    f.style.opacity = t(p, .5, .56); f.style.transform = "translate3d(" + mix(-ecart * .2, ecart, m) + "px," + (petit ? mix(0, 60, m) : 0) + "px," + mix(-120, 0, m) + "px) rotateY(" + mix(-30, 0, m) + "deg)";
+    var tp = $(".tampon", f), k = t(p, .7, .78); tp.style.opacity = k; tp.style.transform = "scale(" + mix(1.6, 1, bond(k)) + ")";
+  };
+
   // 01 : chaque situation devient une action datée et attribuée
   jeux.pourquoi = function (s, p) {
     $$(".volet", s.plateau).forEach(function (v, i) { var q = doux(t(p, .38 + i * .05, .52 + i * .05)); v.style.setProperty("--tour", (q * 180).toFixed(1) + "deg"); v.classList.toggle("retourne", q > .5); });
@@ -308,7 +339,7 @@
       var d = s.cible - s.p; s.p = calme || force || Math.abs(d) < .0004 ? s.cible : s.p + d * .16;
       var proche = y + H * 1.2 > s.haut && y < s.haut + s.el.offsetHeight + H * .2;
       if (!proche && s.vu === s.p) return;
-      if (s.vu !== s.p || proche && (s.nom === "constat" || s.nom === "tri" || s.nom === "client")) { s.vu = s.p; try { appliquer(s, s.p); if (jeux[s.nom]) jeux[s.nom](s, s.p, temps); } catch (e) { s.vu = null; } }
+      if (s.vu !== s.p || proche && (s.nom === "constat" || s.nom === "tri" || s.nom === "client" || s.nom === "mails")) { s.vu = s.p; try { appliquer(s, s.p); if (jeux[s.nom]) jeux[s.nom](s, s.p, temps); } catch (e) { s.vu = null; } }
     });
     leFil(y);
     var mil = y + 40, sombre = false, bsombre = false, ch = -1, n;
