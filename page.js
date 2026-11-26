@@ -18,7 +18,7 @@
   function noms() {
     var h = decodeURIComponent((location.hash || "").replace(/^#/, "")).split("/").map(function (x) { return x.trim().slice(0, 40); });
     if (!h[0] || (doc.getElementById(h[0]) && h.length < 2)) return;
-    var v = { groupe: h[0], societe: h[1] || h[0], societe2: h[2], societe3: h[3] };
+    var v = { groupe: h[0], societe: h[1] || h[0], societe2: h[2], societe3: h[3], societe4: h[4] };
     $$("[data-nom]").forEach(function (e) { if (v[e.dataset.nom]) e.textContent = v[e.dataset.nom]; });
   }
   try { noms(); } catch (e) { /* lien illisible : noms génériques */ }
@@ -87,23 +87,96 @@
     rai(f, t(p, .5, .95));
   };
 
-  var objets = [["mail", "Mails"], ["table", "Excel"], ["doc", "Word"], ["doc", "Devis PDF"], ["agenda", "Agenda"], ["photo", "Photos"], ["calc", "Comptabilité"], ["banque", "Banque"], ["sms", "SMS"], ["boite", "Stock"], ["dossier", "Dossiers"], ["ticket", "Tickets"]];
+  var objets = [["mail", "Outlook"], ["doc", "Word"], ["table", "Excel"], ["dossier", "Dossiers du réseau"], ["calc", "Logiciel de gestion"], ["cosmoya", "IA externe"], ["sms", "Téléphone"], ["doc", "PDF"], ["agenda", "Agenda"], ["photo", "Photos"]];
   var nuage = $("#nuage"), posees = objets.map(function (o, i) {
     var e = doc.createElement("div"); e.className = "objet"; e.innerHTML = '<svg><use href="#i-' + o[0] + '"/></svg>'; e.appendChild(doc.createTextNode(o[1])); nuage.appendChild(e);
     var an = i / objets.length * Math.PI * 2 + .35; return { e: e, an: an, r: .34 + .1 * ((i * 7) % 5) / 4, z: -420 + ((i * 173) % 620), d: i * 1.7 };
   });
+  var liensOutils = null, navette = null;
   jeux.constat = function (s, p, temps) {
-    var k = doux(t(p, .66, .84)), entree = expo(t(p, 0, .12)), c = $("#coeur"), v = t(p, .78, .86);
+    var entree = expo(t(p, 0, .12)), c = $("#coeur"), v = t(p, .78, .86), k = doux(t(p, .62, .8));
+    if (!liensOutils) { liensOutils = doc.createElementNS("http://www.w3.org/2000/svg", "svg"); liensOutils.setAttribute("class", "liens-outils"); s.plateau.insertBefore(liensOutils, s.plateau.firstChild);
+      navette = doc.createElement("div"); navette.className = "navette"; navette.innerHTML = '<svg><use href="#i-doc"/></svg><span></span>'; s.plateau.appendChild(navette); }
+    var pos = [], rx = Math.min(L * .4, 560), ry = H * (petit ? .26 : .27);
     posees.forEach(function (o, i) {
-      var ret = doux(borne(t(p, .66, .82) * 1.35 - i * .028)), haut = i % 2 ? 1 : -1, rang = Math.floor(i / 2), prof = (o.z + 420) / 620;
-      var x = ((rang + .5) / 6 - .5) * L * (petit ? 1.25 : .98) + (haut > 0 ? L * .06 : -L * .04) + (p - .4) * L * .16 * (prof + .3) * haut * -1, y = haut * H * (.23 + .13 * ((rang * 3 + i) % 4) / 3) + Math.sin(temps * .7 + o.d) * 9;
-      var tour = ret * 2.4, xr = (x * Math.cos(tour) - y * Math.sin(tour)) * (1 - ret), yr = (x * Math.sin(tour) + y * Math.cos(tour)) * (1 - ret), z = mix(-260 + prof * 360, -60, ret); x = xr; y = yr;
-      if (ret > 0) y += -38 * ret;
-      o.e.style.transform = "translate(-50%,-50%) translate3d(" + x.toFixed(1) + "px," + y.toFixed(1) + "px," + (z - 500 * (1 - entree)).toFixed(1) + "px) rotateY(" + (Math.sin(temps * .4 + o.d) * 12).toFixed(2) + "deg) rotateZ(" + (Math.sin(temps * .3 + o.d) * 4 + ret * 50).toFixed(2) + "deg) scale(" + mix(1, .25, ret).toFixed(3) + ")";
-      o.e.style.opacity = entree * (1 - t(ret, .82, 1)) * (z < -200 ? .8 : 1);
-      o.e.style.filter = z < -170 ? "blur(" + ((-170 - z) / 70).toFixed(1) + "px)" : "";
+      var haut = i % 2 ? 1 : -1, rang = Math.floor(i / 2), prof = (o.z + 420) / 620;
+      var x0 = ((rang + .5) / 5 - .5) * L * (petit ? 1.2 : .9) + (haut > 0 ? L * .05 : -L * .04), y0 = haut * H * (.24 + .12 * ((rang * 3 + i) % 4) / 3) + Math.sin(temps * .7 + o.d) * 8;
+      var an = i / posees.length * Math.PI * 2 - Math.PI / 2, x1 = Math.cos(an) * rx, y1 = Math.sin(an) * ry - 30 + Math.sin(temps * .7 + o.d) * 4;
+      var q = doux(borne(k * 1.3 - i * .03)), x = mix(x0, x1, q), y = mix(y0, y1, q), z = mix(-260 + prof * 360, 0, q);
+      pos.push([x, y, q]);
+      o.e.style.transform = "translate(-50%,-50%) translate3d(" + x.toFixed(1) + "px," + y.toFixed(1) + "px," + (z - 500 * (1 - entree)).toFixed(1) + "px) rotateY(" + (Math.sin(temps * .4 + o.d) * 12 * (1 - q)).toFixed(2) + "deg) rotateZ(" + (Math.sin(temps * .3 + o.d) * 4 * (1 - q)).toFixed(2) + "deg)";
+      o.e.style.opacity = entree * (z < -200 ? .8 : 1); o.e.style.filter = z < -170 ? "blur(" + ((-170 - z) / 70).toFixed(1) + "px)" : "";
     });
-    c.style.opacity = v > 0 ? 1 : 0; c.style.transform = "scale(" + (v > 0 ? bond(v) : 0).toFixed(3) + ") rotate(" + mix(-30, 0, expo(v)) + "deg)";
+    // le document qui passe d'un outil à l'autre : chercher, copier, coller
+    var nv = t(p, .24, .52), etapes = [[0, "Rechercher"], [1, "Copier"], [4, "Coller"], [2, "Copier"], [4, "Coller"]], f = nv * (etapes.length - 1), i0 = Math.min(etapes.length - 2, Math.floor(f)), fr = doux(f - i0);
+    var A = pos[etapes[i0][0]], B = pos[etapes[i0 + 1][0]];
+    navette.style.opacity = nv > 0 && nv < 1 ? 1 : 0;
+    navette.style.transform = "translate(-50%,-50%) translate3d(" + mix(A[0], B[0], fr).toFixed(1) + "px," + (mix(A[1], B[1], fr) - 44 - Math.sin(fr * Math.PI) * 50).toFixed(1) + "px,60px)";
+    navette.lastChild.textContent = etapes[fr < .5 ? i0 : i0 + 1][1];
+    // les liens vers Pilote
+    liensOutils.setAttribute("viewBox", (-L / 2) + " " + (-H / 2) + " " + L + " " + H);
+    var h = ""; pos.forEach(function (q) { if (q[2] > .98) h += '<path pathLength="1" d="M0 -30L' + q[0].toFixed(1) + " " + q[1].toFixed(1) + '"/>'; }); liensOutils.innerHTML = h;
+    liensOutils.style.opacity = t(p, .8, .9);
+    c.style.opacity = v > 0 ? 1 : 0; c.style.transform = "scale(" + (v > 0 ? bond(v) : 0).toFixed(3) + ")";
+  };
+
+  // 01 : chaque situation devient une action datée et attribuée
+  jeux.pourquoi = function (s, p) {
+    $$(".volet", s.plateau).forEach(function (v, i) { var q = doux(t(p, .38 + i * .05, .52 + i * .05)); v.style.setProperty("--tour", (q * 180).toFixed(1) + "deg"); v.classList.toggle("retourne", q > .5); });
+  };
+  // 02 : la recherche, puis Word et Excel depuis le dossier
+  jeux.recherche = function (s, p) {
+    var f = $("#rch .fenetre"), e = expo(t(p, .02, .14)), z = doux(t(p, .46, .58)), d = doux(t(p, .78, .9)), tp = $("#tape"), mot = "Martin", n = Math.round(mot.length * t(p, .56, .66));
+    f.style.transformOrigin = "43% 8%"; f.style.transform = "translate3d(0," + mix(H * .3, 0, e) + "px,0) rotateX(" + mix(24, 0, e) + "deg) scale(" + mix(1, petit ? 2.6 : 2, z) + ")";
+    f.style.opacity = t(p, .02, .06) * (1 - .9 * d); f.style.filter = d > 0 ? "blur(" + (6 * d).toFixed(1) + "px)" : "";
+    tp.textContent = mot.slice(0, n) || ""; tp.style.opacity = n ? 1 : 0;
+    var w = $("#docword"); w.style.opacity = d; w.style.transform = "translate(-50%,-50%) translate3d(0," + mix(80, 0, d) + "px,0) scale(" + mix(.9, 1, d) + ")";
+    $("#rch").style.transform = "translate(-50%,-50%)";
+  };
+  // 03 : l'appel entrant
+  jeux.client = function (s, p, temps) { var a = $("#appel"); a.style.opacity = t(p, .1, .14) * (1 - t(p, .3, .36)); a.style.transform = "scale(" + (1 + .05 * Math.sin(temps * 6) * (p < .3 ? 1 : 0)) + ")"; };
+  // 04 : le téléphone, puis la photo qui rejoint le dossier
+  jeux.poche = function (s, p) {
+    var ec = p < .34 ? "e1" : p < .56 ? "e2" : p < .78 ? "e3" : "e4"; $$(".e", s.plateau).forEach(function (e) { e.classList.toggle("vu", e.id === ec); });
+    var tel = $("#tel2"), e = expo(t(p, .04, .16)); tel.style.opacity = t(p, .04, .08); tel.style.transform = "translate3d(0," + mix(120, 0, e) + "px,0) rotateY(" + mix(-30, -8, e) + "deg)";
+    var b = $("#bureau"), eb = expo(t(p, .56, .66)); b.style.opacity = eb; b.style.transform = "translate3d(" + mix(-60, 0, eb) + "px,0,0)";
+    var v = $("#photo-vol"), q = doux(t(p, .76, .86)), ar = $("#photo-arrivee");
+    var tb = tel.getBoundingClientRect(), bb = ar.getBoundingClientRect(), jb = s.plateau.querySelector(".poche-jeu").getBoundingClientRect();
+    var x0 = tb.left + tb.width / 2 - jb.left, y0 = tb.top + tb.height * .4 - jb.top, x1 = bb.left + 26 - jb.left, y1 = bb.top + bb.height / 2 - jb.top;
+    v.style.opacity = q > 0 && q < 1 ? 1 : 0; v.style.transform = "translate(-50%,-50%) translate3d(" + mix(x0, x1, q) + "px," + (mix(y0, y1, q) - Math.sin(q * Math.PI) * 90) + "px,0) scale(" + mix(1.4, .7, q) + ")";
+    ar.classList.toggle("arrive", p > .85);
+  };
+  // 05 : trois logiciels et des copier-coller, puis un seul
+  jeux.chatgpt = function (s, p) {
+    var f1 = $("#f1"), f2 = $("#f2"), f3 = $("#f3"), fp = $("#fp"), pr = $("#presse"), m = doux(t(p, .56, .7)), e = expo(t(p, .04, .16));
+    [f1, f2, f3].forEach(function (f, i) { var dx = (1 - i) * f.offsetWidth * 1.15 * m; f.style.opacity = e * (1 - t(p, .62, .7)); f.style.transform = "translate3d(" + dx + "px," + mix(50, 0, e) + "px,0) scale(" + mix(1, .8, m) + ")"; });
+    var c = t(p, .14, .48), k = Math.min(3, Math.floor(c * 4)), fr = doux(c * 4 - k), de = [f1, f2, f2, f3][k], vers = [f2, f2, f3, f3][k];
+    var mots = ["Copier", "Coller", "Copier", "Coller"]; pr.textContent = mots[k];
+    var bx = pr.parentNode.getBoundingClientRect(), A = de.getBoundingClientRect(), B = vers.getBoundingClientRect();
+    pr.style.opacity = c > 0 && c < 1 ? 1 : 0; pr.style.transform = "translate(-50%,-50%) translate3d(" + (mix(A.left + A.width / 2, B.left + B.width / 2, fr) - bx.left) + "px," + (A.top - bx.top - 16 - Math.sin(fr * Math.PI) * 40) + "px,0)";
+    fp.style.opacity = t(p, .64, .72); fp.style.transform = "translate(-50%,-50%) scale(" + mix(.85, 1, expo(t(p, .64, .78))) + ")";
+  };
+  // 06 : chaque société, l'une après l'autre
+  jeux.metiers = function (s, p) {
+    $$(".metier", s.plateau).forEach(function (m, i) {
+      var a = .1 + i * .19, q = t(p, a, a + .16), li = $$("li", m), n = Math.ceil(q * li.length);
+      m.classList.toggle("actif", p >= a && (i === 3 || p < a + .19)); m.classList.toggle("passe", i < 3 && p >= a + .19);
+      li.forEach(function (l, j) { l.classList.toggle("allume", j < n || p >= a + .19); });
+      m.style.opacity = t(p, a - .06, a);
+    });
+  };
+  // 08 : le schéma, Pilote au centre
+  var noeuds = [["Clients", 0], ["Fournisseurs", 0], ["Devis", 0], ["Commandes", 0], ["Stock", 0], ["SAV", 0], ["Documents", 0], ["E-mails", 0], ["Agenda", 0], ["Tâches", 0], ["Banque", 0], ["Comptabilité", 0], ["BatiCheck", 1], ["Métrage", 1]], schemaFait = null;
+  jeux.coeur = function (s, p) {
+    var sc = $("#schema"); if (!schemaFait) { schemaFait = noeuds.map(function (n) { var e = doc.createElement("span"); e.className = "noeud-s" + (n[1] ? " envisage" : ""); e.textContent = n[0]; sc.appendChild(e); return e; }); }
+    var w = sc.offsetWidth, h = sc.offsetHeight, rx = w * .44, ry = h * .4, svg = $("#liens"), d = "";
+    svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+    schemaFait.forEach(function (e, i) {
+      var an = i / noeuds.length * Math.PI * 2 - Math.PI / 2, x = w / 2 + Math.cos(an) * rx, y = h / 2 + Math.sin(an) * ry, q = expo(t(p, .14 + i * .03, .26 + i * .03));
+      e.style.opacity = q; e.style.transform = "translate(-50%,-50%) translate(" + mix(w / 2, x, q).toFixed(1) + "px," + mix(h / 2, y, q).toFixed(1) + "px) scale(" + mix(.5, 1, q) + ")";
+      if (q > .95) d += '<path class="' + (noeuds[i][1] ? "pointille" : "") + '" d="M' + (w / 2) + " " + (h / 2) + "L" + x.toFixed(1) + " " + y.toFixed(1) + '"/>';
+    });
+    svg.innerHTML = d;
   };
 
   jeux.devis = function (s, p) {
@@ -184,9 +257,10 @@
   // ---- Le fil en bas de l'écran
   var fil = $("#fil"), fp = $("#fil-plein"), fb = $("#fil-point"), fli = $$("#fil li"), hist = par.histoire[0], filPos = 0;
   function leFil(y) {
-    var h = hist.p, vis = expo(t(h, .16, .26)), bas = doux(t(h, .82, .99)), fin = par.fin[0], q = 0;
-    if (y > hist.haut + hist.el.offsetHeight) { vis = 1; bas = 1; }
-    var op = vis * (1 - t(fin.p, .02, .16)); if (y < hist.haut - H) op = 0;
+    var h = hist.p, vis = expo(t(h, .16, .26)), bas = doux(t(h, .82, .99)), q = 0;
+    if (y > hist.haut + hist.el.offsetHeight - H * .5) { vis = 1; bas = 1; }
+    var cur = scenes.find(function (x) { return y + H * .5 >= x.haut && y + H * .5 < x.haut + x.el.offsetHeight; });
+    var op = vis * (cur && (cur.stations || cur === hist) ? 1 : 0); if (y < hist.haut - H) op = 0;
     var place = $("#place-fil").getBoundingClientRect(), dy = (place.top + place.height / 2) - (H - fil.offsetHeight / 2);
     if (bas >= 1) dy = 0;
     fil.style.opacity = op; fil.style.setProperty("--bas", bas.toFixed(2)); fil.style.visibility = op < .01 ? "hidden" : "";
@@ -214,7 +288,7 @@
   })();
 
   // ---- Boucle
-  var barre = $("#barre"), temps0 = $("#temps"), chapitres = ["vente", "administration", "direction"], force = false;
+  var barre = $("#barre"), temps0 = $("#temps"), force = false;
   function image(ms) {
     requestAnimationFrame(image);
     if (innerHeight < 60 || innerWidth < 60) return;
@@ -225,12 +299,12 @@
       var d = s.cible - s.p; s.p = calme || force || Math.abs(d) < .0004 ? s.cible : s.p + d * .16;
       var proche = y + H * 1.2 > s.haut && y < s.haut + s.el.offsetHeight + H * .2;
       if (!proche && s.vu === s.p) return;
-      if (s.vu !== s.p || proche && (s.nom === "constat" || s.nom === "tri" || s.nom === "fin")) { s.vu = s.p; try { appliquer(s, s.p); if (jeux[s.nom]) jeux[s.nom](s, s.p, temps); } catch (e) { s.vu = null; } }
+      if (s.vu !== s.p || proche && (s.nom === "constat" || s.nom === "tri" || s.nom === "client")) { s.vu = s.p; try { appliquer(s, s.p); if (jeux[s.nom]) jeux[s.nom](s, s.p, temps); } catch (e) { s.vu = null; } }
     });
     leFil(y);
     var mil = y + 40, sombre = false, bsombre = false, ch = -1, n;
-    scenes.forEach(function (s) { var r = mil >= s.haut && mil < s.haut + s.el.offsetHeight, rb = y + H - 40 >= s.haut && y + H - 40 < s.haut + s.el.offsetHeight; if (s.el.classList.contains("nuit")) { if (r) sombre = true; if (rb) bsombre = true; } n = chapitres.indexOf(s.el.id); if (n >= 0 && y + H * .5 >= s.haut) ch = n; });
-    barre.classList.toggle("sombre", sombre); fil.classList.toggle("sombre", bsombre); var tx = ch < 0 ? "" : ["Partie 1 · La vente", "Partie 2 · L’administration", "Partie 3 · La direction"][ch]; if (temps0.textContent !== tx) temps0.textContent = tx;
+    scenes.forEach(function (s) { var r = mil >= s.haut && mil < s.haut + s.el.offsetHeight, rb = y + H - 40 >= s.haut && y + H - 40 < s.haut + s.el.offsetHeight; if (s.el.classList.contains("nuit")) { if (r) sombre = true; if (rb) bsombre = true; } if (s.el.dataset.chap && y + H * .5 >= s.haut) ch = s.el.dataset.chap; });
+    barre.classList.toggle("sombre", sombre); fil.classList.toggle("sombre", bsombre); var tx = ch === -1 ? "" : ch; if (temps0.textContent !== tx) temps0.textContent = tx;
     dessiner(temps, y < H * 6 ? 1 : .55);
   }
 
@@ -258,16 +332,22 @@
   ["touchend", "touchcancel"].forEach(function (e) { addEventListener(e, function () { doigt = false; attendre(); }, { passive: true }); });
   addEventListener("keydown", function (e) {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
-    var c3 = { "1": "vente", "2": "administration", "3": "direction", Home: "haut" }[e.key];
+    if (e.key === "f" || e.key === "F") { pleinEcran(); return; }
+    var c3 = { "1": "haut", "2": "direction", "3": "administration", Home: "haut" }[e.key];
     if (c3) { e.preventDefault(); var s3 = scenes.find(function (x) { return x.el.id === c3; }); cancelAnimationFrame(vol); vol = null; but = null; force = true; scrollTo(0, c3 === "haut" ? 0 : versY(s3, s3.arrets[0])); setTimeout(function () { force = false; }, 120); return; }
  var l = arrets(), y = but !== null ? but : scrollY, c = null;
     if (e.key === "ArrowRight" || e.key === "ArrowDown" || e.key === "PageDown" || e.key === "Enter" || (e.key === " " && !e.shiftKey)) c = l.find(function (v) { return v > y + 12; });
     else if (e.key === "ArrowLeft" || e.key === "ArrowUp" || e.key === "PageUp" || e.key === " ") c = l.reverse().find(function (v) { return v < y - 12; });
     else return; e.preventDefault(); if (c !== undefined && c !== null) aller(c);
   });
+  function pleinEcran() { try { if (doc.fullscreenElement) doc.exitFullscreen(); else doc.documentElement.requestFullscreen(); } catch (e) {} }
+  var bp = $("#plein"); if (bp) bp.addEventListener("click", pleinEcran);
+  try { history.scrollRestoration = "manual"; } catch (e) {}
+  setInterval(function () { try { if (!vol) sessionStorage.setItem("pilote-y", String(Math.round(scrollY))); } catch (e) {} }, 1000);
   $$("[data-vers]").forEach(function (a) { a.addEventListener("click", function (e) { e.preventDefault(); var s = scenes.find(function (x) { return x.el.id === a.dataset.vers; }); but = null; scrollTo(0, a.dataset.vers === "haut" ? 0 : versY(s, s.arrets[0])); }); });
 
-  mesurer(); var dl = innerWidth, dh = innerHeight;
+  mesurer(); try { var yy = +sessionStorage.getItem("pilote-y"); if (yy > 0) { force = true; scrollTo(0, yy); setTimeout(function () { force = false; }, 200); } } catch (e) {}
+  var dl = innerWidth, dh = innerHeight;
   addEventListener("resize", function () { if (innerWidth === dl && Math.abs(innerHeight - dh) < 120 && innerWidth <= 820) return; dl = innerWidth; dh = innerHeight; mesurer(); });
   addEventListener("load", mesurer);
   window.pilot = { scenes: scenes, aller: function (id, p) { var s = scenes.find(function (x) { return x.el.id === id; }); force = true; doigt = true; cancelAnimationFrame(vol); vol = null; scrollTo(0, versY(s, p)); }, arrets: arrets };

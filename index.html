@@ -8,7 +8,7 @@
 <meta name="description" content="Présentation du logiciel de gestion Pilote.">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="icone.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -38,6 +38,7 @@
 <header class="barre" id="barre">
   <a class="marque" href="#haut" data-vers="haut"><svg class="c-logo"><use href="#logo"/></svg>Pilote</a>
   <span class="temps" id="temps"></span>
+  <nav class="acces" aria-label="Parties"><a href="#" data-vers="haut">Présentation</a><a href="#" data-vers="direction">Direction</a><a href="#" data-vers="administration">Administration</a><button type="button" id="plein" aria-label="Plein écran"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></nav>
 </header>
 <canvas id="lueurs" aria-hidden="true"></canvas>
 
@@ -64,30 +65,29 @@
       <h1>Présentation du logiciel Pilote</h1>
       <p class="chapo">Un seul logiciel pour les mails, les devis, les factures, le stock, l’agenda, la banque et la comptabilité de <span data-nom="groupe">votre groupe</span>.</p>
     </div>
-    <div class="fenetre3d" id="haut-fenetre"><div class="fenetre"><img src="img/accueil.jpg?v=6" width="1440" height="640" alt="Le tableau de bord de Pilote, avec des données d’exemple"><i class="rai"></i></div></div>
+    <div class="fenetre3d" id="haut-fenetre"><div class="fenetre"><img src="img/accueil.jpg?v=8" width="1440" height="640" alt="Le tableau de bord de Pilote, avec des données d’exemple"><i class="rai"></i></div></div>
   </div>
 </section>
 
-<!-- 1. Le constat -->
-<section class="scene constat" id="constat" data-scene="constat" data-long="4.6" data-arrets="0.16 0.31 0.46 0.61 0.92">
-  <div class="plateau">
-    <div class="nuage" id="nuage"></div>
-    <div class="phrases">
-      <p class="phrase" data-a="0.08 0.14" data-z="0.2 0.24">Aujourd’hui, une partie des informations est dans les mails.</p>
-      <p class="phrase" data-a="0.24 0.29" data-z="0.35 0.39">Une autre partie est dans Word et Excel.</p>
-      <p class="phrase" data-a="0.39 0.44" data-z="0.5 0.54">Le reste est dans plusieurs logiciels.</p>
-      <p class="phrase" data-a="0.54 0.59" data-z="0.66 0.7">Pour retrouver un devis, il faut chercher partout.</p>
-      <p class="phrase bas" data-a="0.82 0.9">Avec Pilote, tout est dans le même logiciel.</p>
+<section class="scene" id="pourquoi" data-scene="pourquoi" data-chap="01 · Pourquoi sommes-nous réunis ?" data-long="4.4" data-arrets="0.3 0.64 0.93">
+  <div class="plateau col">
+    <div class="titres"><h2 data-a="0.02 0.1"><span>Pourquoi sommes-nous réunis ?</span><small>Aujourd’hui, chaque opportunité compte.</small></h2></div>
+    <div class="cartes4">
+      <div class="volet" data-a="0.08 0.18 plonge"><div class="v-face"><svg><use href="#i-doc"/></svg><b>Un devis sans réponse</b><span>envoyé il y a trois semaines</span></div><div class="v-dos"><b>Relancer le devis</b><em>Lundi 30 novembre</em><i>Commercial</i></div></div>
+      <div class="volet" data-a="0.12 0.22 plonge"><div class="v-face"><svg><use href="#i-camion"/></svg><b>Une livraison à confirmer</b><span>prévue cette semaine</span></div><div class="v-dos"><b>Confirmer la livraison</b><em>Mardi 1<sup>er</sup> décembre</em><i>Logistique</i></div></div>
+      <div class="volet" data-a="0.16 0.26 plonge"><div class="v-face"><svg><use href="#i-sms"/></svg><b>Un client en attente</b><span>d’une réponse depuis hier</span></div><div class="v-dos"><b>Rappeler le client</b><em>Aujourd’hui</em><i>Gérant</i></div></div>
+      <div class="volet" data-a="0.2 0.3 plonge"><div class="v-face"><svg><use href="#i-euro"/></svg><b>Un règlement en retard</b><span>échu depuis 15 jours</span></div><div class="v-dos"><b>Relancer le règlement</b><em>Mercredi 2 décembre</em><i>Comptabilité</i></div></div>
     </div>
-    <div class="coeur" id="coeur"><span class="carre"><svg><use href="#logo"/></svg></span></div>
+    <p class="legende" data-a="0.42 0.5" data-z="0.66 0.7">Chaque situation devient une action, avec une date et une personne.</p>
+    <ul class="mots"><li data-a="0.7 0.75">Relancer au bon moment.</li><li data-a="0.74 0.79">Répondre rapidement.</li><li data-a="0.78 0.83">Respecter ses engagements.</li><li data-a="0.82 0.87">Fidéliser ses clients.</li></ul>
   </div>
 </section>
 
 <!-- 2. Le déclencheur -->
-<section class="scene" id="declencheur" data-scene="declencheur" data-long="2.3" data-arrets="0.75">
+<section data-chap="01 · Pourquoi sommes-nous réunis ?" class="scene" id="declencheur" data-scene="declencheur" data-long="2.3" data-arrets="0.75">
   <div class="plateau centre">
     <h2 class="grand" data-a="0.05 0.2">La facture électronique <br>devient obligatoire</h2>
-    <p class="chapo" data-a="0.18 0.3">Il faut donc changer de façon de faire les factures. Pilote s’en occupe, et gère aussi le reste de l’entreprise.</p>
+    <p class="chapo" data-a="0.18 0.3">C’est l’un des déclencheurs de cette réorganisation. Notre objectif va plus loin que cette obligation.</p>
     <div class="dates">
       <svg viewBox="0 0 800 6" preserveAspectRatio="none"><path class="rail" d="M0 3H800"/><path class="lum" data-trace="0.28 0.62" pathLength="1" d="M0 3H800"/></svg>
       <div class="date" data-a="0.34 0.46"><b>Depuis le 1<sup>er</sup> septembre 2026</b><span>Toutes les entreprises doivent pouvoir recevoir des factures électroniques.</span></div>
@@ -96,35 +96,152 @@
   </div>
 </section>
 
+<!-- 1. Le constat -->
+<section data-chap="02 · Simplifier votre quotidien" class="scene constat" id="outils" data-scene="constat" data-long="4.6" data-arrets="0.16 0.31 0.46 0.61 0.92">
+  <div class="plateau">
+    <div class="nuage" id="nuage"></div>
+    <div class="phrases">
+      <p class="phrase" data-a="0.08 0.14" data-z="0.2 0.24">Aujourd’hui, une information passe par Outlook, Word, Excel et les dossiers du réseau.</p>
+      <p class="phrase" data-a="0.24 0.29" data-z="0.35 0.39">On la cherche, on la copie, on la colle ailleurs.</p>
+      <p class="phrase" data-a="0.39 0.44" data-z="0.5 0.54">Et on la ressaisit plusieurs fois.</p>
+      <p class="phrase" data-a="0.54 0.59" data-z="0.66 0.7">Avec Pilote, vous gardez vos outils.</p>
+      <p class="phrase bas" data-a="0.82 0.9">Pilote range chaque information dans le bon dossier.</p>
+    </div>
+    <div class="coeur" id="coeur"><span class="carre"><svg><use href="#logo"/></svg></span></div>
+  </div>
+</section>
+
+<section class="scene" id="moins" data-scene="moins" data-chap="02 · Simplifier votre quotidien" data-long="2.2" data-arrets="0.82">
+  <div class="plateau centre">
+    <ul class="liste-geante"><li data-a="0.06 0.16">Moins de recherches.</li><li data-a="0.18 0.28">Moins d’attente.</li><li data-a="0.3 0.4">Moins de ressaisies.</li><li class="bleu" data-a="0.44 0.56">Plus de temps pour votre métier.</li></ul>
+  </div>
+</section>
+
+<section class="scene nuit" id="phrase" data-scene="nuit" data-chap="02 · Simplifier votre quotidien" data-long="2" data-arrets="0.72">
+  <div class="plateau centre"><i class="arc"></i>
+    <h2 class="grand" data-a="0.08 0.3 masque">Ce n’est plus à vous de vous adapter aux outils.</h2>
+    <h2 class="grand clair" data-a="0.34 0.54 masque">Ce sont les outils qui doivent s’adapter à vous.</h2>
+  </div>
+</section>
+
+<section class="scene" id="recherche" data-scene="recherche" data-chap="02 · Simplifier votre quotidien" data-long="3.2" data-arrets="0.3 0.62 0.93">
+  <div class="plateau col">
+    <div class="titres">
+      <h2 data-a="0.02 0.1" data-z="0.44 0.48"><span>Tout part de l’écran d’accueil de Pilote</span><small>Les tâches du jour, les chiffres, et une recherche pour tout retrouver.</small></h2>
+      <h2 data-a="0.48 0.54" data-z="0.76 0.8"><span>On tape un nom, Pilote retrouve tout</span><small>Le client, ses devis, ses factures, ses contacts.</small></h2>
+      <h2 data-a="0.8 0.86"><span>Word et Excel restent utilisables</span><small>Un document s’ouvre depuis le dossier, puis revient dans le dossier.</small></h2>
+    </div>
+    <div class="gouffre">
+      <div class="fenetre3d milieu" id="rch"><div class="fenetre"><img loading="lazy" src="img/accueil.jpg?v=8" width="1440" height="640" alt="L’écran d’accueil de Pilote"><span class="tape-recherche" id="tape">M</span></div></div>
+      <div class="carte docword" id="docword"><div class="d-tete"><svg><use href="#i-dossier"/></svg><div><b>Chantier Durand</b><small>Documents</small></div></div>
+        <div class="ligne-doc"><span class="ico w">W</span><div><b>compte-rendu-reunion.docx</b><small>Modifié ce matin</small></div><span class="btn petit">Modifier dans Word</span></div>
+        <div class="ligne-doc"><span class="ico x">X</span><div><b>metre-facade.xlsx</b><small>Version 2</small></div><span class="btn petit gris">Modifier dans Excel</span></div>
+        <div class="ligne-doc"><span class="ico p">PDF</span><div><b>plan-RDC-v3.pdf</b><small>Version 3</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="client" data-scene="client" data-chap="03 · Tout savoir sur un client" data-long="5" data-arrets="0.2 0.46 0.72 0.94">
+  <div class="plateau duo">
+    <div class="dit">
+      <h2 data-a="0.03 0.12">Un client. <br>Toute son histoire. <br>En un coup d’œil.</h2>
+      <ol class="pas">
+        <li data-pas="0.12 0.3">Le client appelle : sa fiche s’ouvre.</li>
+        <li data-pas="0.3 0.56">Devis, commandes, e-mails, réclamations, documents : tout est au même endroit.</li>
+        <li data-pas="0.56 0.8">Cosmo IA résume la situation, avec les éléments sources.</li>
+        <li data-pas="0.8 2">On agit directement : appeler, renvoyer un devis, relancer, créer une tâche.</li>
+      </ol>
+    </div>
+    <div class="jeu">
+      <div class="carte fichecl" data-a="0.05 0.16 plonge">
+        <div class="fc-tete"><span class="rond">MB</span><div><b>MARTIN BÂTIMENT</b><small>Client régulier · depuis 2019</small></div><span class="appel" id="appel"><svg><use href="#i-sms"/></svg>Appel entrant</span></div>
+        <div class="tuiles-cl">
+          <div data-a="0.3 0.34 pop"><small>Coordonnées</small><b>06 39 98 12 34</b></div>
+          <div data-a="0.31 0.35 pop" class="alerte"><small>Devis</small><b>3 à relancer</b></div>
+          <div data-a="0.32 0.36 pop"><small>Commandes</small><b>Dernière il y a 5 jours</b></div>
+          <div data-a="0.33 0.37 pop"><small>Livraisons</small><b>1 à confirmer</b></div>
+          <div data-a="0.34 0.38 pop"><small>E-mails</small><b>12 rangés</b></div>
+          <div data-a="0.35 0.39 pop" class="rouge"><small>Réclamation</small><b>1 ouverte</b></div>
+          <div data-a="0.36 0.4 pop"><small>Documents</small><b>8 fichiers</b></div>
+          <div data-a="0.37 0.41 pop"><small>Mémos</small><b>2 notes</b></div>
+          <div data-a="0.38 0.42 pop"><small>Rendez-vous</small><b>Jeudi 9 h</b></div>
+          <div data-a="0.39 0.43 pop" class="rouge"><small>Solde client</small><b>1 240 € en retard</b></div>
+        </div>
+        <div class="synthese" data-a="0.56 0.64"><b><svg><use href="#i-cosmoya"/></svg>Cosmo IA</b><p>Client régulier. Trois devis attendent une relance. Une réclamation est ouverte depuis lundi. Une facture de 1 240 € est en retard.</p><div class="sources"><span>Devis</span><span>Réclamation</span><span>Facture</span></div></div>
+        <div class="actions-cl" data-a="0.8 0.88"><span class="btn">Appeler</span><span class="btn gris">Renvoyer le devis</span><span class="btn gris">Relancer</span><span class="btn gris">Créer une tâche</span></div>
+        <p class="exemple">Illustration avec des données fictives</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="poche" data-scene="poche" data-chap="04 · Votre entreprise dans votre poche" data-long="5.4" data-arrets="0.22 0.46 0.7 0.94">
+  <div class="plateau duo inverse">
+    <div class="dit">
+      <h2 data-a="0.03 0.12">Sur le terrain, <br>l’information doit vous suivre.</h2>
+      <ol class="pas">
+        <li data-pas="0.12 0.34">Chez un client : on consulte le stock, et on peut appeler le fournisseur.</li>
+        <li data-pas="0.34 0.56">On retrouve le dernier devis, on le renvoie, on programme la livraison.</li>
+        <li data-pas="0.56 0.78">Sur un chantier : on prend une photo et on choisit le dossier.</li>
+        <li data-pas="0.78 2">La photo arrive dans le dossier, avec la date et son auteur.</li>
+      </ol>
+      <p class="note-dit" data-a="0.12 0.2">Pilote s’ouvre dans le navigateur du téléphone. Il faut une connexion.</p>
+    </div>
+    <div class="jeu poche-jeu">
+      <div class="carte dossier-bureau" id="bureau"><div class="d-tete"><svg><use href="#i-dossier"/></svg><div><b>Chantier Durand</b><small>Documents · sur l’ordinateur</small></div></div>
+        <div class="ligne-doc"><span class="ico p">PDF</span><div><b>plan-RDC-v3.pdf</b><small>Version 3</small></div></div>
+        <div class="ligne-doc neuf" id="photo-arrivee"><span class="ico ph"><svg><use href="#i-photo"/></svg></span><div><b>photo-facade.jpg</b><small>Aujourd’hui, 10:42 · ajoutée depuis le téléphone</small></div></div>
+      </div>
+      <div class="tel grand-tel" id="tel2"><div class="ecran ecrans">
+        <div class="e" id="e1"><small>Stock</small><b>Peinture façade blanc 15 L</b><div class="chiffres"><span><i>En stock</i>24</span><span><i>Réservé</i>6</span><span><i>Disponible</i>18</span></div><span class="btn gris">Appeler le fournisseur</span></div>
+        <div class="e" id="e2"><small>Dernier devis</small><b>Devis D-2026-0148</b><p>2 480 € HT · envoyé le 12 novembre</p><span class="btn">Renvoyer le devis</span><span class="btn gris">Programmer la livraison</span></div>
+        <div class="e sombre" id="e3"><div class="viseur-tel"></div><span class="choix">Dossier : Chantier Durand</span><span class="declencheur"></span></div>
+        <div class="e" id="e4"><span class="okrond"><svg><use href="#i-ok"/></svg></span><b>Photo ajoutée</b><p>Dossier Chantier Durand</p></div>
+      </div></div>
+      <div class="photo-vol" id="photo-vol"><svg><use href="#i-photo"/></svg></div>
+    </div>
+  </div>
+</section>
+
 <!-- 3. Une même histoire -->
-<section class="scene" id="histoire" data-scene="histoire" data-long="2.8" data-arrets="0.76">
+<section data-chap="05 · Des processus intelligents" class="scene" id="histoire" data-scene="histoire" data-long="2.8" data-arrets="0.76">
   <div class="plateau centre histoire-plateau">
-    <h2 class="grand" data-a="0.04 0.16" data-z="0.86 0.97">Nous allons suivre la demande <br>d’un client, étape par étape</h2>
+    <h2 class="grand" data-a="0.04 0.16" data-z="0.86 0.97">Des processus intelligents</h2>
     <div class="place-fil" id="place-fil"></div>
     <ul class="regards" data-z="0.84 0.95">
-      <li data-a="0.5 0.6"><b>1. La vente</b><span>Demande, devis, commande, livraison, facture</span></li>
-      <li data-a="0.56 0.66"><b>2. L’administration</b><span>Documents, banque, relances, comptabilité</span></li>
-      <li data-a="0.62 0.72"><b>3. La direction</b><span>Chiffres, suivi des dossiers, décisions</span></li>
+      <li data-a="0.5 0.6"><b>A. Du mail au devis</b><span>La demande du client devient un devis</span></li>
+      <li data-a="0.56 0.66"><b>B. Du devis fournisseur au devis client</b><span>Avec un coefficient sur les prix</span></li>
+      <li data-a="0.62 0.72"><b>C. D’un ancien devis au nouveau</b><span>Sans tout retaper</span></li>
     </ul>
   </div>
 </section>
 
-<!-- ================= VENDRE ================= -->
-<section class="scene nuit" id="vente" data-scene="nuit" data-long="1.9" data-arrets="0.7">
-  <div class="plateau centre"><i class="arc"></i>
-    <p class="num" data-a="0.06 0.24">Partie 1</p><h2 class="geant" data-a="0.1 0.35 masque">La vente</h2>
-    <p class="chapo" data-a="0.36 0.52">Recevoir la demande d’un client, faire le devis, livrer et facturer.</p>
+<section class="scene" id="chatgpt" data-scene="chatgpt" data-chap="05 · Des processus intelligents" data-station="0" data-long="3.6" data-arrets="0.4 0.9">
+  <div class="plateau col">
+    <div class="titres">
+      <h2 data-a="0.02 0.1" data-z="0.5 0.54"><span>Aujourd’hui : on passe par une IA à part</span><small>On copie le mail, on le colle dans ChatGPT, puis on recopie la réponse dans le devis.</small></h2>
+      <h2 data-a="0.56 0.62"><span>Avec Pilote : tout se fait au même endroit</span><small>Cosmo IA travaille directement dans Pilote, avec les données de l’entreprise.</small></h2>
+    </div>
+    <div class="trois-fen">
+      <div class="mini-fen" id="f1"><div class="mf-barre">Outlook</div><i></i><i></i><i class="c"></i></div>
+      <div class="mini-fen" id="f2"><div class="mf-barre">ChatGPT</div><i></i><i class="c"></i><i></i></div>
+      <div class="mini-fen" id="f3"><div class="mf-barre">Logiciel de devis</div><i></i><i></i><i class="c"></i></div>
+      <span class="presse" id="presse">Copier</span>
+      <div class="fen-pilote" id="fp"><div class="mf-barre"><svg class="c-logo"><use href="#logo"/></svg>Pilote</div><div class="fp-corps"><div class="fp-mail"><i></i><i></i><i class="c"></i></div><div class="fp-ia"><svg><use href="#i-cosmoya"/></svg>Cosmo IA prépare le devis</div><div class="fp-devis"><i></i><i></i><i class="c"></i></div></div></div>
+    </div>
+    <div class="compteur" data-a="0.36 0.44" data-z="0.5 0.54">3 logiciels · 4 copier-coller · le risque de se tromper en recopiant</div>
   </div>
 </section>
 
-<section class="scene" id="mail" data-scene="mail" data-long="3.1" data-station="0" data-arrets="0.33 0.61 0.86">
+<section data-chap="05 · Processus A : du mail au devis" class="scene" id="mail" data-scene="mail" data-long="3.1" data-station="0" data-arrets="0.33 0.61 0.86">
   <div class="plateau duo">
     <div class="dit">
       <h2 data-a="0.04 0.16">Un client demande <br>un devis par mail</h2>
       <ol class="pas">
         <li data-pas="0.16 0.42">Pilote reconnaît le client et range le mail dans sa fiche.</li>
         <li data-pas="0.42 0.64">On enregistre le plan et les photos dans la fiche du client.</li>
-        <li data-pas="0.64 2">Pilote résume le mail et indique qu’il est à traiter.</li>
+        <li data-pas="0.64 2">On demande ensuite le devis à Cosmo IA, puis on contrôle les lignes.</li>
       </ol>
     </div>
     <div class="jeu">
@@ -144,13 +261,13 @@
   </div>
 </section>
 
-<section class="scene" id="devis" data-scene="devis" data-long="5.4" data-station="1" data-arrets="0.13 0.39 0.73 0.95">
+<section data-chap="05 · Processus B : du devis fournisseur au devis client" class="scene" id="devis" data-scene="devis" data-long="5.4" data-station="1" data-arrets="0.13 0.39 0.73 0.95">
   <div class="plateau col">
     <div class="titres">
       <h2 data-a="0.02 0.09" data-z="0.2 0.24"><span>Le fournisseur envoie son devis</span><small>Exemple : une réparation à 800 € HT.</small></h2>
       <h2 data-a="0.24 0.29" data-z="0.4 0.44"><span>On demande un devis client à Cosmo IA</span><small>Cosmo IA est l’assistant du logiciel. On lui écrit une phrase.</small></h2>
       <h2 data-a="0.44 0.49" data-z="0.74 0.78"><span>Cosmo IA recalcule les prix</span><small>Ici, chaque prix du fournisseur est multiplié par 2.</small></h2>
-      <h2 data-a="0.78 0.83"><span>Le devis du client est prêt</span><small>On le vérifie, on peut changer chaque prix, puis on l’enregistre.</small></h2>
+      <h2 data-a="0.78 0.83"><span>Le devis du client est prêt</span><small>On vérifie chaque ligne, on peut changer chaque prix, puis on valide.</small></h2>
     </div>
     <div class="atelier">
       <div class="feuille source" id="src" data-a="0.04 0.14 gauche">
@@ -174,17 +291,17 @@
         <div class="f-pied" data-a="0.82 0.88"><span class="btn">Enregistrer</span></div>
       </div>
     </div>
-    <p class="legende" data-a="0.86 0.92">Les prix du fournisseur n’apparaissent pas sur le devis du client.</p>
+    <p class="legende" data-a="0.86 0.92">Marge brute prévue : 800 € HT, soit un taux de marque de 50 %. Les prix d’achat n’apparaissent pas sur le devis du client.</p>
   </div>
 </section>
 
-<section class="scene" id="recopie" data-scene="recopie" data-long="2.7" data-station="1" data-arrets="0.5 0.92">
+<section data-chap="05 · Processus C : d’un ancien devis au nouveau" class="scene" id="recopie" data-scene="recopie" data-long="2.7" data-station="1" data-arrets="0.5 0.92">
   <div class="plateau duo inverse">
     <div class="dit">
       <h2 data-a="0.04 0.16">Refaire un devis <br>à partir d’un autre</h2>
       <ol class="pas">
         <li data-pas="0.16 0.6">On demande à Cosmo IA de recopier le devis de M. Martin pour M. Durand.</li>
-        <li data-pas="0.6 2">On peut aussi prendre en photo un ancien devis papier. Pilote en fait un devis modifiable.</li>
+        <li data-pas="0.6 2">On peut aussi reprendre un ancien devis en PDF ou en photo. Les prix sont mis à jour après contrôle, et le document d’origine reste rattaché.</li>
       </ol>
     </div>
     <div class="jeu">
@@ -198,7 +315,7 @@
   </div>
 </section>
 
-<section class="scene" id="commande" data-scene="commande" data-long="5" data-station="2 3 4" data-arrets="0.26 0.45 0.66 0.93">
+<section data-chap="06 · De la vente au suivi client" class="scene" id="commande" data-scene="commande" data-long="5" data-station="2 3 4" data-arrets="0.26 0.45 0.66 0.93">
   <div class="plateau duo">
     <div class="dit">
       <h2 data-a="0.02 0.1">Du devis accepté <br>à la facture</h2>
@@ -227,7 +344,19 @@
   </div>
 </section>
 
-<section class="scene" id="agenda" data-scene="agenda" data-long="3.4" data-station="4" data-arrets="0.35 0.62 0.92">
+<section class="scene" id="metiers" data-scene="metiers" data-chap="06 · De la vente au suivi client" data-long="4" data-arrets="0.28 0.47 0.66 0.92">
+  <div class="plateau col">
+    <div class="titres"><h2 data-a="0.02 0.1"><span>Le même principe, dans chaque société</span><small>Des exemples de processus, que la démonstration détaillera.</small></h2></div>
+    <div class="metiers">
+      <div class="metier" data-k="0"><b data-nom="societe2">Société 2</b><ol><li>Devis peinture</li><li>Vérification du stock</li><li>Commande fournisseur</li><li>Réception</li><li>Livraison</li><li>Facture</li><li>Relance</li></ol></div>
+      <div class="metier" data-k="1"><b data-nom="societe4">Société 4</b><ol><li>Demande technique</li><li>Dossier avec les plans</li><li>Consultation des fabricants</li><li>Étude et devis</li><li>Commande</li><li>Suivi de la livraison</li></ol></div>
+      <div class="metier" data-k="2"><b data-nom="societe">Votre entreprise</b><ol><li>Dossier de maîtrise d’ouvrage</li><li>Architectes, avocats, sous-traitants</li><li>Plans</li><li>Devis</li><li>Bons pour accord</li><li>Commandes</li></ol></div>
+      <div class="metier" data-k="3"><b data-nom="societe3">Société 3</b><ol><li>Ancien devis</li><li>Conditions du client</li><li>Dossiers</li><li>Relances à suivre par la direction</li></ol></div>
+    </div>
+  </div>
+</section>
+
+<section data-chap="06 · De la vente au suivi client" class="scene" id="agenda" data-scene="agenda" data-long="3.4" data-station="4" data-arrets="0.35 0.62 0.92">
   <div class="plateau duo inverse">
     <div class="dit">
       <h2 data-a="0.04 0.14">Prendre rendez-vous <br>avec le client</h2>
@@ -248,120 +377,72 @@
   </div>
 </section>
 
-<section class="scene" id="sansreponse" data-scene="sansreponse" data-long="2.2" data-station="4" data-arrets="0.75">
-  <div class="plateau centre">
-    <h2 class="grand" data-a="0.05 0.18">Voir les devis sans réponse</h2>
-    <div class="trois">
-      <div class="tuile" data-a="0.2 0.34 plonge"><svg><use href="#i-doc"/></svg><b data-compte="0.24 0.46 0 25">25</b><span>devis en cours</span></div>
-      <div class="tuile alerte" data-a="0.28 0.42 plonge"><svg><use href="#i-cloche"/></svg><b data-compte="0.32 0.54 0 21">21</b><span>envoyés il y a plus de 30 jours</span></div>
-      <div class="tuile" data-a="0.36 0.5 plonge"><svg><use href="#i-mail"/></svg><b data-compte="0.4 0.6 0 6">6</b><span>pas encore ouverts par le client</span></div>
-    </div>
-    <p class="chapo" data-a="0.6 0.72">Pilote montre quels clients n’ont pas répondu, pour les rappeler.</p>
-  </div>
-</section>
-
-<!-- ================= ADMINISTRER ================= -->
-<section class="scene nuit" id="administration" data-scene="nuit" data-long="1.9" data-arrets="0.7">
-  <div class="plateau centre"><i class="arc"></i>
-    <p class="num" data-a="0.06 0.24">Partie 2</p><h2 class="geant" data-a="0.1 0.35 masque">L’administration</h2>
-    <p class="chapo" data-a="0.36 0.52">Ranger les documents, suivre la banque, relancer les clients et tenir la comptabilité.</p>
-  </div>
-</section>
-
-<section class="scene" id="tri" data-scene="tri" data-long="4.4" data-station="4" data-arrets="0.235 0.95">
+<section class="scene" id="relances2" data-scene="relances2" data-chap="06 · De la vente au suivi client" data-station="4" data-long="3" data-arrets="0.5 0.92">
   <div class="plateau col">
-    <div class="titres"><h2 data-a="0.02 0.1"><span>Ranger les documents reçus</span><small>Pilote reconnaît le type de document et propose où le ranger. Une personne vérifie.</small></h2></div>
-    <div class="tri" id="tribox">
-      <div class="entree"><span><svg><use href="#i-mail"/></svg>Reçu par mail</span><span><svg><use href="#i-photo"/></svg>Pris en photo</span><span><svg><use href="#i-doc"/></svg>Fichier déposé</span></div>
-      <div class="lecteur" id="lecteur"><svg><use href="#i-cosmoya"/></svg></div>
-      <div class="casiers">
-        <div class="casier" data-k="0"><svg><use href="#i-boite"/></svg><b>Achats</b><small>0 document</small></div>
-        <div class="casier" data-k="1"><svg><use href="#i-ok"/></svg><b>Commandes</b><small>0 document</small></div>
-        <div class="casier" data-k="2"><svg><use href="#i-ticket"/></svg><b>Notes de frais</b><small>0 document</small></div>
-        <div class="casier" data-k="3"><svg><use href="#i-auto"/></svg><b>Véhicules</b><small>0 document</small></div>
-      </div>
+    <div class="titres"><h2 data-a="0.02 0.1"><span>Relancer sans oublier personne</span><small>Les devis sans réponse et les factures impayées sont suivis séparément.</small></h2></div>
+    <div class="deux-col">
+      <div class="carte colonne" data-a="0.1 0.22 plonge"><h3><svg><use href="#i-doc"/></svg>Devis sans réponse</h3>
+        <div class="trio"><span><b data-compte="0.18 0.36 0 25">25</b>en cours</span><span><b data-compte="0.2 0.38 0 21">21</b>depuis plus de 30 jours</span><span><b data-compte="0.22 0.4 0 6">6</b>pas encore ouverts</span></div>
+        <p>Pilote les repère. Le commercial rappelle le client au bon moment.</p></div>
+      <div class="carte colonne" data-a="0.3 0.42 plonge"><h3><svg><use href="#i-euro"/></svg>Factures impayées</h3>
+        <ol class="niveaux"><li data-a="0.42 0.48 gauche"><b>1</b>Rappel cordial</li><li data-a="0.48 0.54 gauche"><b>2</b>Relance plus ferme</li><li data-a="0.54 0.6 gauche"><b>3</b>Mise en demeure, ou appel du responsable</li></ol>
+        <p>Les délais se règlent. Chaque e-mail est relu avant l’envoi.</p></div>
     </div>
-    <p class="legende" data-a="0.8 0.88">Exemple : sur le contrôle technique d’un véhicule, Pilote lit le kilométrage.</p>
   </div>
 </section>
 
-<section class="scene" id="fe" data-scene="fe" data-long="3.8" data-station="4" data-arrets="0.47 0.93">
-  <div class="plateau col">
-    <div class="titres">
-      <h2 data-a="0.02 0.1" data-z="0.48 0.52"><span>Envoyer une facture électronique</span><small>La facture passe par une plateforme agréée par l’État, puis arrive chez le client.</small></h2>
-      <h2 data-a="0.52 0.58"><span>Recevoir une facture électronique</span><small>La facture du fournisseur arrive dans Pilote. On peut l’approuver, la contester ou la refuser.</small></h2>
-    </div>
-    <div class="reseau">
-      <svg viewBox="0 0 900 260" id="reseau-svg"><path class="rail" d="M110 130 C260 40 320 40 450 130 S640 220 790 130"/><path class="lum" id="fe-lum" pathLength="1" d="M110 130 C260 40 320 40 450 130 S640 220 790 130"/></svg>
-      <div class="noeud n1"><b data-nom="societe" class="maj1">Votre entreprise</b></div><div class="noeud n2"><svg><use href="#i-verrou"/></svg><b>Plateforme agréée</b></div><div class="noeud n3"><b id="fe-autre">Le client</b></div>
-      <div class="pli" id="pli"><svg><use href="#i-doc"/></svg></div>
-    </div>
-    <div class="statuts-zone"><div class="statuts" data-z="0.48 0.53">
-      <span data-on="0.16 actif">Déposée</span><span data-on="0.24 actif">Transmise</span><span data-on="0.32 actif">Reçue par le client</span><span data-on="0.4 actif">Approuvée</span><span data-on="0.46 actif">Encaissée</span>
-    </div><div class="statuts" data-a="0.84 0.9"><span class="actif">Approuver</span><span class="actif">Contester</span><span class="actif">Refuser</span></div></div>
-    
-  </div>
-</section>
-
-<section class="scene" id="banque" data-scene="banque" data-long="4.6" data-station="5" data-arrets="0.28 0.54 0.93">
-  <div class="plateau col">
-    <div class="titres">
-      <h2 data-a="0.02 0.1" data-z="0.56 0.6"><span>Un client a payé par virement</span><small>Pilote retrouve la facture qui correspond. Le reste à payer passe à zéro.</small></h2>
-      <h2 data-a="0.6 0.66"><span>Le relevé de banque dans Pilote</span><small>Pour chaque ligne, Pilote propose la facture qui correspond. On valide.</small></h2>
-    </div>
-    <div class="rappro" data-z="0.58 0.66 recule">
-      <div class="carte ligne" data-a="0.06 0.16 gauche"><small>Relevé de banque</small><b>VIR SEPA REÇU · MARTIN</b><em class="vert">+ 1 920,00 €</em></div>
-      <svg class="pont" viewBox="0 0 200 60" preserveAspectRatio="none"><path class="rail" d="M0 30H200"/><path class="lum" data-trace="0.2 0.32" pathLength="1" d="M0 30H200"/></svg>
-      <div class="carte ligne" data-a="0.1 0.2 droite"><small>Facture FA20260580</small><b>Martin</b><em>Reste à payer <span data-compte="0.36 0.46 1920 0 €">0 €</span></em></div>
-      <span class="sure" data-a="0.3 0.36 pop">Trouvée</span>
-      <div class="ecritures" data-a="0.44 0.52"><div><span>512 Banque</span><b>1 920,00</b></div><div><span>411 Martin</span><b>1 920,00</b></div><small>Pilote prépare l’écriture comptable. La comptabilité la valide.</small></div>
-    </div>
-    <div class="fenetre3d milieu" id="f-banque"><div class="fenetre"><img loading="lazy" src="img/banque.jpg?v=6" width="1440" height="900" alt="L’écran Banque : chaque ligne du relevé avec sa proposition"><i class="rai"></i></div></div>
-  </div>
-</section>
-
-<section class="scene" id="relances" data-scene="relances" data-long="3.2" data-station="5" data-arrets="0.93">
-  <div class="plateau col">
-    <div class="titres"><h2 data-a="0.02 0.1"><span>Relancer les clients qui n’ont pas payé</span><small>Pilote prépare l’e-mail. On le relit avant de l’envoyer.</small></h2></div>
-    <div class="etapes">
-      <svg viewBox="0 0 800 6" preserveAspectRatio="none"><path class="rail" d="M0 3H800"/><path class="lum" data-trace="0.1 0.5" pathLength="1" d="M0 3H800"/></svg>
-      <div data-a="0.12 0.2 pop"><b>1<sup>er</sup> rappel</b><span>message poli</span></div><div data-a="0.26 0.34 pop"><b>2<sup>e</sup> relance</b><span>message plus ferme</span></div><div data-a="0.4 0.48 pop"><b>Mise en demeure</b><span>dernière relance</span></div>
-    </div>
-    <div class="fenetre3d milieu" id="f-relances"><div class="fenetre"><img loading="lazy" src="img/relances.jpg?v=6" width="1440" height="900" alt="L’écran Relances des impayés"><i class="rai"></i></div></div>
-  </div>
-</section>
-
-<section class="scene" id="bilan" data-scene="bilan" data-long="3.4" data-station="5" data-arrets="0.395 0.67 0.92">
+<section class="scene" id="ensemble" data-scene="ensemble" data-chap="07 · Travailler ensemble" data-long="4.4" data-arrets="0.3 0.5 0.7 0.93">
   <div class="plateau duo">
     <div class="dit">
-      <h2 data-a="0.03 0.12">Préparer le bilan <br>avec l’expert-comptable</h2>
+      <h2 data-a="0.03 0.12">Moins d’e‑mails internes. <br>Plus d’informations utiles, au bon endroit.</h2>
       <ol class="pas">
-        <li data-pas="0.12 0.4">On crée un dossier partagé entre l’équipe et l’expert-comptable.</li>
-        <li data-pas="0.4 0.7">L’expert-comptable demande un document. On le lui envoie dans le dossier.</li>
-        <li data-pas="0.7 2">Le document est validé. Toute l’équipe le voit.</li>
+        <li data-pas="0.12 0.36">Un plan arrive par e-mail : le gérant le range dans le dossier du chantier.</li>
+        <li data-pas="0.36 0.56">La comptabilité indique que l’acompte est reçu.</li>
+        <li data-pas="0.56 0.76">La direction valide la commande.</li>
+        <li data-pas="0.76 2">Un collaborateur retrouve la décision et la dernière version du plan.</li>
       </ol>
     </div>
     <div class="jeu">
-      <div class="carte dossier" data-a="0.05 0.18 plonge">
-        <div class="d-tete"><svg><use href="#i-dossier"/></svg><div><b>Bilan 2026</b><small>Projet · échéance 31 mars</small></div><span class="etat" id="d-etat">À traiter</span></div>
-        <div class="gens"><span class="rond" data-a="0.16 0.22 pop">AD</span><span class="rond b" data-a="0.2 0.26 pop">CO</span><span class="rond c" data-a="0.24 0.3 pop">DI</span><span class="rond inv" data-a="0.3 0.36 pop">EC</span><em data-a="0.34 0.4">Expert-comptable, invité</em></div>
-        <div class="msg" data-a="0.42 0.48 gauche"><span class="rond inv">EC</span><p>Il me manque le justificatif de l’écriture du 12 octobre.</p></div>
-        <div class="msg moi" data-a="0.52 0.58 droite"><p>Le voici, joint au dossier.</p><span class="rond">AD</span></div>
-        <div class="piece grande" data-a="0.6 0.66 pop"><svg><use href="#i-doc"/></svg>justificatif-octobre.pdf<em data-a="0.72 0.78 pop" class="okv"><svg><use href="#i-ok"/></svg>Validé</em></div>
+      <div class="carte dossier" data-a="0.05 0.16 plonge">
+        <div class="d-tete"><svg><use href="#i-dossier"/></svg><div><b>Chantier Durand</b><small>Dossier partagé · 5 participants</small></div><span class="etat">En cours</span></div>
+        <div class="onglets-d"><span>Échanges</span><span>Tâches</span><span>Documents</span><span>Historique</span></div>
+        <div class="piece grande" data-a="0.16 0.24 gauche"><svg><use href="#i-doc"/></svg>plan-RDC-v3.pdf<em class="okv">Version 3 · depuis un e-mail</em></div>
+        <div class="msg" data-a="0.38 0.46 gauche"><span class="rond inv">CO</span><p>Acompte de 30 % reçu sur le compte.</p></div>
+        <div class="decision" data-a="0.58 0.66 pop"><b>Décision · Direction</b>Commande des matériaux validée.</div>
+        <div class="trace" data-a="0.78 0.86"><svg><use href="#i-ok"/></svg>Retrouvé par un collaborateur, sans demander à personne</div>
+        <p class="exemple">Chacun voit ce que ses droits lui permettent.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="scene" id="coeur" data-scene="coeur" data-chap="08 · Pilote, le cœur de l’entreprise" data-long="3.6" data-arrets="0.5 0.93">
+  <div class="plateau col">
+    <div class="titres"><h2 data-a="0.02 0.1"><span>Pilote relie les informations, les personnes et les métiers</span><small>Vos outils évoluent. Votre organisation aussi.</small></h2></div>
+    <div class="schema" id="schema">
+      <svg class="liens" id="liens"></svg>
+      <div class="centre-schema" data-a="0.08 0.18 pop"><span class="carre"><svg><use href="#logo"/></svg></span><b>Pilote</b><small>avec Cosmo IA</small></div>
+    </div>
+    <p class="legende" data-a="0.74 0.82">En pointillés : extensions envisagées.</p>
+  </div>
+</section>
+
+<section class="scene nuit" id="conclusion" data-scene="nuit" data-chap="08 · Pilote, le cœur de l’entreprise" data-long="2.2" data-arrets="0.72">
+  <div class="plateau centre"><i class="arc"></i>
+    <h2 class="grand" data-a="0.08 0.3 masque">Maintenant, voyons comment cela se traduit dans votre quotidien.</h2>
+    <p class="chapo" data-a="0.34 0.5">Démonstration dans Pilote</p>
   </div>
 </section>
 
 <!-- ================= DIRIGER ================= -->
-<section class="scene nuit" id="direction" data-scene="nuit" data-long="1.9" data-arrets="0.7">
+<section data-chap="Chapitre séparé · Direction" class="scene nuit" id="direction" data-scene="nuit" data-long="1.9" data-arrets="0.7">
   <div class="plateau centre"><i class="arc"></i>
-    <p class="num" data-a="0.06 0.24">Partie 3</p><h2 class="geant" data-a="0.1 0.35 masque">La direction</h2>
-    <p class="chapo" data-a="0.36 0.52">Voir les chiffres de l’entreprise et suivre les dossiers.</p>
+    <p class="num" data-a="0.06 0.24">Chapitre séparé</p><h2 class="geant" data-a="0.1 0.35 masque">La direction</h2>
+    <p class="chapo" data-a="0.36 0.52">Les chiffres de chaque société, les dossiers et les décisions.</p>
   </div>
 </section>
 
-<section class="scene" id="plongee" data-scene="plongee" data-long="6" data-station="6" data-arrets="0.16 0.45 0.62 0.95">
+<section data-chap="Chapitre séparé · Direction" class="scene" id="plongee" data-scene="plongee" data-long="6" data-station="6" data-arrets="0.16 0.45 0.62 0.95">
   <div class="plateau col">
     <div class="titres">
       <h2 data-a="0.02 0.08" data-z="0.2 0.24"><span>Le tableau de bord de l’entreprise</span><small>Chiffre d’affaires, factures à encaisser, devis en cours, stock, banque.</small></h2>
@@ -369,14 +450,14 @@
       <h2 data-a="0.74 0.79"><span>On retrouve la facture de M. Martin</span><small>Elle est payée et comptée dans le chiffre d’affaires.</small></h2>
     </div>
     <div class="gouffre">
-      <div class="fenetre3d milieu" id="p1"><div class="fenetre"><img loading="lazy" src="img/accueil.jpg?v=6" width="1440" height="640" alt="Le tableau de bord"></div></div>
-      <div class="fenetre3d milieu" id="p2"><div class="fenetre"><img loading="lazy" src="img/stats.jpg?v=6" width="1440" height="900" alt="L’écran des statistiques : chiffre d’affaires, factures, panier moyen, marge estimée"></div></div>
+      <div class="fenetre3d milieu" id="p1"><div class="fenetre"><img loading="lazy" src="img/accueil.jpg?v=8" width="1440" height="640" alt="Le tableau de bord"></div></div>
+      <div class="fenetre3d milieu" id="p2"><div class="fenetre"><img loading="lazy" src="img/stats.jpg?v=8" width="1440" height="900" alt="L’écran des statistiques : chiffre d’affaires, factures, panier moyen, marge estimée"></div></div>
       <div class="feuille grande" id="p3"><div class="f-tete"><b class="maj" data-nom="societe">Votre entreprise</b><span>Facture FA20260580</span></div><table><tbody><tr><td>Déplacement</td><td>160 €</td></tr><tr><td>Recherche de panne</td><td>300 €</td></tr><tr><td>Pompe de relevage</td><td>640 €</td></tr><tr><td>Main-d’œuvre</td><td>500 €</td></tr></tbody><tfoot><tr><td>Total TTC</td><td>1 920 €</td></tr></tfoot></table><span class="tampon" data-a="0.86 0.92 pop">Soldée</span></div>
     </div>
   </div>
 </section>
 
-<section class="scene" id="decision" data-scene="decision" data-long="3.2" data-station="6" data-arrets="0.35 0.6 0.92">
+<section data-chap="Chapitre séparé · Direction" class="scene" id="decision" data-scene="decision" data-long="3.2" data-station="6" data-arrets="0.35 0.6 0.92">
   <div class="plateau duo inverse">
     <div class="dit">
       <h2 data-a="0.03 0.12">Demander une action <br>et suivre la réponse</h2>
@@ -397,28 +478,115 @@
   </div>
 </section>
 
-<section class="scene" id="societes" data-scene="societes" data-long="3" data-station="6" data-arrets="0.48 0.9">
+<section data-chap="Chapitre séparé · Direction" class="scene" id="societes" data-scene="societes" data-long="3" data-station="6" data-arrets="0.48 0.9">
   <div class="plateau centre">
     <h2 class="grand" data-a="0.04 0.14">Chaque société a ses propres données</h2>
     <p class="chapo" data-a="0.14 0.24">Les données des sociétés ne se mélangent pas. Chaque personne voit seulement ce à quoi elle a droit.</p>
-    <div class="coffres">
+    <div class="coffres quatre">
       <div class="coffre" data-a="0.2 0.34 plonge"><svg><use href="#i-verrou"/></svg><b data-nom="societe">Votre entreprise</b><span>Ses clients, ses factures, ses comptes</span></div>
       <div class="coffre" data-a="0.26 0.4 plonge"><svg><use href="#i-verrou"/></svg><b data-nom="societe2">Société 2</b><span>Ses clients, ses factures, ses comptes</span></div>
       <div class="coffre" data-a="0.32 0.46 plonge"><svg><use href="#i-verrou"/></svg><b data-nom="societe3">Société 3</b><span>Ses clients, ses factures, ses comptes</span></div>
+      <div class="coffre" data-a="0.38 0.52 plonge"><svg><use href="#i-verrou"/></svg><b data-nom="societe4">Société 4</b><span>Ses clients, ses factures, ses comptes</span></div>
     </div>
-    <svg class="rayons" viewBox="0 0 600 120"><path data-trace="0.5 0.66" pathLength="1" d="M100 0C100 70 300 40 300 116"/><path data-trace="0.5 0.66" pathLength="1" d="M300 0V116"/><path data-trace="0.5 0.66" pathLength="1" d="M500 0C500 70 300 40 300 116"/></svg>
+    <svg class="rayons" viewBox="0 0 800 120"><path data-trace="0.54 0.68" pathLength="1" d="M100 0C100 70 400 40 400 116"/><path data-trace="0.54 0.68" pathLength="1" d="M300 0C300 60 400 50 400 116"/><path data-trace="0.54 0.68" pathLength="1" d="M500 0C500 60 400 50 400 116"/><path data-trace="0.54 0.68" pathLength="1" d="M700 0C700 70 400 40 400 116"/></svg>
     <div class="groupe" data-a="0.66 0.76 pop"><svg><use href="#i-graphe"/></svg><b>Un tableau de bord commun à toutes les sociétés</b></div>
   </div>
 </section>
 
-<section class="scene nuit fin" id="fin" data-scene="fin" data-long="2.4" data-arrets="0.4 0.98">
+<!-- ================= ADMINISTRER ================= -->
+<section data-chap="Chapitre séparé · Administration" class="scene nuit" id="administration" data-scene="nuit" data-long="1.9" data-arrets="0.7">
   <div class="plateau centre"><i class="arc"></i>
-    <h2 class="grand" data-a="0.06 0.24 masque" data-z="0.5 0.58">En résumé : on saisit une information une seule fois, et toutes les personnes autorisées peuvent l’utiliser.</h2>
-    <div class="finale"><span class="carre grand-carre" id="fin-logo" data-a="0.6 0.72 pop"><svg><use href="#logo"/></svg></span><p class="question" data-a="0.72 0.86">Quelles tâches vous prennent le plus de temps aujourd’hui&nbsp;?</p></div>
+    <p class="num" data-a="0.06 0.24">Chapitre séparé</p><h2 class="geant" data-a="0.1 0.35 masque">L’administration</h2>
+    <p class="chapo" data-a="0.36 0.52">Documents reçus, facture électronique, banque, relances et comptabilité.</p>
+  </div>
+</section>
+
+<section data-chap="Chapitre séparé · Administration" class="scene" id="tri" data-scene="tri" data-long="4.4" data-station="4" data-arrets="0.235 0.95">
+  <div class="plateau col">
+    <div class="titres"><h2 data-a="0.02 0.1"><span>Ranger les documents reçus</span><small>Pilote reconnaît le type de document et propose où le ranger. Une personne vérifie.</small></h2></div>
+    <div class="tri" id="tribox">
+      <div class="entree"><span><svg><use href="#i-mail"/></svg>Reçu par mail</span><span><svg><use href="#i-photo"/></svg>Pris en photo</span><span><svg><use href="#i-doc"/></svg>Fichier déposé</span></div>
+      <div class="lecteur" id="lecteur"><svg><use href="#i-cosmoya"/></svg></div>
+      <div class="casiers">
+        <div class="casier" data-k="0"><svg><use href="#i-boite"/></svg><b>Achats</b><small>0 document</small></div>
+        <div class="casier" data-k="1"><svg><use href="#i-ok"/></svg><b>Commandes</b><small>0 document</small></div>
+        <div class="casier" data-k="2"><svg><use href="#i-ticket"/></svg><b>Notes de frais</b><small>0 document</small></div>
+        <div class="casier" data-k="3"><svg><use href="#i-auto"/></svg><b>Véhicules</b><small>0 document</small></div>
+      </div>
+    </div>
+    <p class="legende" data-a="0.8 0.88">Exemple : sur le contrôle technique d’un véhicule, Pilote lit le kilométrage.</p>
+  </div>
+</section>
+
+<section data-chap="Chapitre séparé · Administration" class="scene" id="fe" data-scene="fe" data-long="3.8" data-station="4" data-arrets="0.47 0.93">
+  <div class="plateau col">
+    <div class="titres">
+      <h2 data-a="0.02 0.1" data-z="0.48 0.52"><span>Envoyer une facture électronique</span><small>La facture passe par une plateforme agréée par l’État, puis arrive chez le client.</small></h2>
+      <h2 data-a="0.52 0.58"><span>Recevoir une facture électronique</span><small>La facture du fournisseur arrive dans Pilote. On peut l’approuver, la contester ou la refuser.</small></h2>
+    </div>
+    <div class="reseau">
+      <svg viewBox="0 0 900 260" id="reseau-svg"><path class="rail" d="M110 130 C260 40 320 40 450 130 S640 220 790 130"/><path class="lum" id="fe-lum" pathLength="1" d="M110 130 C260 40 320 40 450 130 S640 220 790 130"/></svg>
+      <div class="noeud n1"><b data-nom="societe" class="maj1">Votre entreprise</b></div><div class="noeud n2"><svg><use href="#i-verrou"/></svg><b>Plateforme agréée</b></div><div class="noeud n3"><b id="fe-autre">Le client</b></div>
+      <div class="pli" id="pli"><svg><use href="#i-doc"/></svg></div>
+    </div>
+    <div class="statuts-zone"><div class="statuts" data-z="0.48 0.53">
+      <span data-on="0.16 actif">Déposée</span><span data-on="0.24 actif">Transmise</span><span data-on="0.32 actif">Reçue par le client</span><span data-on="0.4 actif">Approuvée</span><span data-on="0.46 actif">Encaissée</span>
+    </div><div class="statuts" data-a="0.84 0.9"><span class="actif">Approuver</span><span class="actif">Contester</span><span class="actif">Refuser</span></div></div>
+    
+  </div>
+</section>
+
+<section data-chap="Chapitre séparé · Administration" class="scene" id="banque" data-scene="banque" data-long="4.6" data-station="5" data-arrets="0.28 0.54 0.93">
+  <div class="plateau col">
+    <div class="titres">
+      <h2 data-a="0.02 0.1" data-z="0.56 0.6"><span>Un client a payé par virement</span><small>Pilote retrouve la facture qui correspond. Le reste à payer passe à zéro.</small></h2>
+      <h2 data-a="0.6 0.66"><span>Le relevé de banque dans Pilote</span><small>Pour chaque ligne, Pilote propose la facture qui correspond. On valide.</small></h2>
+    </div>
+    <div class="rappro" data-z="0.58 0.66 recule">
+      <div class="carte ligne" data-a="0.06 0.16 gauche"><small>Relevé de banque</small><b>VIR SEPA REÇU · MARTIN</b><em class="vert">+ 1 920,00 €</em></div>
+      <svg class="pont" viewBox="0 0 200 60" preserveAspectRatio="none"><path class="rail" d="M0 30H200"/><path class="lum" data-trace="0.2 0.32" pathLength="1" d="M0 30H200"/></svg>
+      <div class="carte ligne" data-a="0.1 0.2 droite"><small>Facture FA20260580</small><b>Martin</b><em>Reste à payer <span data-compte="0.36 0.46 1920 0 €">0 €</span></em></div>
+      <span class="sure" data-a="0.3 0.36 pop">Trouvée</span>
+      <div class="ecritures" data-a="0.44 0.52"><div><span>512 Banque</span><b>1 920,00</b></div><div><span>411 Martin</span><b>1 920,00</b></div><small>Pilote prépare l’écriture comptable. La comptabilité la valide.</small></div>
+    </div>
+    <div class="fenetre3d milieu" id="f-banque"><div class="fenetre"><img loading="lazy" src="img/banque.jpg?v=8" width="1440" height="900" alt="L’écran Banque : chaque ligne du relevé avec sa proposition"><i class="rai"></i></div></div>
+  </div>
+</section>
+
+<section data-chap="Chapitre séparé · Administration" class="scene" id="relances" data-scene="relances" data-long="3.2" data-station="5" data-arrets="0.93">
+  <div class="plateau col">
+    <div class="titres"><h2 data-a="0.02 0.1"><span>Relancer les clients qui n’ont pas payé</span><small>Pilote prépare l’e-mail. On le relit avant de l’envoyer.</small></h2></div>
+    <div class="etapes">
+      <svg viewBox="0 0 800 6" preserveAspectRatio="none"><path class="rail" d="M0 3H800"/><path class="lum" data-trace="0.1 0.5" pathLength="1" d="M0 3H800"/></svg>
+      <div data-a="0.12 0.2 pop"><b>1<sup>er</sup> rappel</b><span>message poli</span></div><div data-a="0.26 0.34 pop"><b>2<sup>e</sup> relance</b><span>message plus ferme</span></div><div data-a="0.4 0.48 pop"><b>Mise en demeure</b><span>dernière relance</span></div>
+    </div>
+    <div class="fenetre3d milieu" id="f-relances"><div class="fenetre"><img loading="lazy" src="img/relances.jpg?v=8" width="1440" height="900" alt="L’écran Relances des impayés"><i class="rai"></i></div></div>
+  </div>
+</section>
+
+<section data-chap="Chapitre séparé · Administration" class="scene" id="bilan" data-scene="bilan" data-long="3.4" data-station="5" data-arrets="0.395 0.67 0.92">
+  <div class="plateau duo">
+    <div class="dit">
+      <h2 data-a="0.03 0.12">Préparer le bilan <br>avec l’expert-comptable</h2>
+      <ol class="pas">
+        <li data-pas="0.12 0.4">On crée un dossier partagé entre l’équipe et l’expert-comptable.</li>
+        <li data-pas="0.4 0.7">L’expert-comptable demande un document. On le lui envoie dans le dossier.</li>
+        <li data-pas="0.7 2">Le document est validé. Toute l’équipe le voit.</li>
+      </ol>
+    </div>
+    <div class="jeu">
+      <div class="carte dossier" data-a="0.05 0.18 plonge">
+        <div class="d-tete"><svg><use href="#i-dossier"/></svg><div><b>Bilan 2026</b><small>Projet · échéance 31 mars</small></div><span class="etat" id="d-etat">À traiter</span></div>
+        <div class="gens"><span class="rond" data-a="0.16 0.22 pop">AD</span><span class="rond b" data-a="0.2 0.26 pop">CO</span><span class="rond c" data-a="0.24 0.3 pop">DI</span><span class="rond inv" data-a="0.3 0.36 pop">EC</span><em data-a="0.34 0.4">Expert-comptable, invité</em></div>
+        <div class="msg" data-a="0.42 0.48 gauche"><span class="rond inv">EC</span><p>Il me manque le justificatif de l’écriture du 12 octobre.</p></div>
+        <div class="msg moi" data-a="0.52 0.58 droite"><p>Le voici, joint au dossier.</p><span class="rond">AD</span></div>
+        <div class="piece grande" data-a="0.6 0.66 pop"><svg><use href="#i-doc"/></svg>justificatif-octobre.pdf<em data-a="0.72 0.78 pop" class="okv"><svg><use href="#i-ok"/></svg>Validé</em></div>
+      </div>
+    </div>
   </div>
 </section>
 </main>
 <p class="note">Captures et exemples réalisés avec des données fictives.</p>
-<script src="page.js?v=6"></script>
+<script src="page.js?v=8"></script>
 </body>
 </html>
