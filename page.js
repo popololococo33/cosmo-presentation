@@ -342,6 +342,8 @@
   addEventListener("keydown", function (e) {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     if (e.key === "f" || e.key === "F") { pleinEcran(); return; }
+    if (e.key === "s" || e.key === "S") { if (somm.classList.contains("ouvert")) fermer(true); else ouvrir(); return; }
+    if (e.key === "Escape") { fermer(true); return; }
     var c3 = { "1": "haut", "2": "direction", "3": "administration", Home: "haut" }[e.key];
     if (c3) { e.preventDefault(); var s3 = scenes.find(function (x) { return x.el.id === c3; }); cancelAnimationFrame(vol); vol = null; but = null; force = true; scrollTo(0, c3 === "haut" ? 0 : versY(s3, s3.arrets[0])); setTimeout(function () { force = false; }, 120); return; }
  var l = arrets(), y = but !== null ? but : scrollY, c = null;
@@ -354,6 +356,49 @@
   try { history.scrollRestoration = "manual"; } catch (e) {}
   setInterval(function () { try { if (!vol) sessionStorage.setItem("pilote-y", String(Math.round(scrollY))); } catch (e) {} }, 1000);
   $$("[data-vers]").forEach(function (a) { a.addEventListener("click", function (e) { e.preventDefault(); var s = scenes.find(function (x) { return x.el.id === a.dataset.vers; }); but = null; scrollTo(0, a.dataset.vers === "haut" ? 0 : versY(s, s.arrets[0])); }); });
+
+  // ---- Sommaire : les chapitres, comme le Dock du Mac
+  var CHAPITRES = [
+    ["haut", "", "Accueil"], ["01", "01", "Pourquoi"], ["02", "02", "Simplifier"], ["03", "03", "Le client"], ["04", "04", "Sur le terrain"],
+    ["05", "05", "Processus"], ["06", "06", "Vente et suivi"], ["07", "07", "Ensemble"], ["08", "08", "Le cœur"],
+    ["Direction", "D", "Direction"], ["Administration", "A", "Administration"]
+  ];
+  var chap = CHAPITRES.map(function (c) {
+    var sc = c[0] === "haut" ? scenes[0] : scenes.find(function (x) { var d = x.el.dataset.chap || ""; return d.indexOf(c[0] + " ·") === 0 || d.indexOf("· " + c[0]) > 0; });
+    return { cle: c[0], num: c[1], nom: c[2], scene: sc };
+  }).filter(function (c) { return c.scene; });
+  var dock = $("#dock"), trame = $("#trame"), somm = $("#sommaire");
+  chap.forEach(function (c, i) {
+    var b = doc.createElement("button"); b.type = "button"; b.className = "puce"; b.setAttribute("aria-label", "Aller à : " + c.nom);
+    b.innerHTML = '<span class="pastille">' + (c.num || '<svg><use href="#logo"/></svg>') + '</span><span class="nomc"></span>'; b.lastChild.textContent = c.nom;
+    b.addEventListener("click", function () { cancelAnimationFrame(vol); vol = null; but = null; force = true; scrollTo(0, i === 0 ? 0 : versY(c.scene, c.scene.arrets[0])); setTimeout(function () { force = false; }, 150); fermer(true); });
+    dock.appendChild(b); c.bouton = b;
+    var t2 = doc.createElement("i"); trame.appendChild(t2); c.trait = t2;
+  });
+  var ouvert = false, attente = null;
+  function ouvrir() { clearTimeout(attente); if (!ouvert) { ouvert = true; somm.classList.add("ouvert"); doc.body.classList.add("dock-ouvert"); } }
+  function fermer(vite) { clearTimeout(attente); attente = setTimeout(function () { ouvert = false; somm.classList.remove("ouvert"); doc.body.classList.remove("dock-ouvert"); grossir(-1); }, vite ? 600 : 250); }
+  // la souris en bas de l'écran fait monter le Dock ; plus haut, il redescend
+  addEventListener("mousemove", function (e) {
+    var bas = innerHeight - e.clientY;
+    if (bas < 70) ouvrir(); else if (ouvert && bas > (dock.offsetHeight + 60)) fermer();
+    if (ouvert) grossir(e.clientX);
+  }, { passive: true });
+  doc.addEventListener("mouseleave", function () { fermer(); });
+  // au doigt : toucher la trame ouvre ou ferme
+  trame.addEventListener("click", function () { if (ouvert) fermer(true); else ouvrir(); });
+  // grossissement des pastilles proches de la souris
+  function grossir(x) {
+    chap.forEach(function (c) { var r = c.bouton.getBoundingClientRect(), d = x < 0 ? 999 : Math.abs(x - (r.left + r.width / 2)), k = 1 + .32 * Math.max(0, 1 - d / 150); c.bouton.style.setProperty("--k", k.toFixed(3)); });
+  }
+  // chapitre en cours : allumé dans le Dock et dans la trame
+  var chapIci = -1;
+  setInterval(function () {
+    var y = scrollY + innerHeight * .5, ici = 0;
+    chap.forEach(function (c, i) { if (y >= c.scene.haut) ici = i; });
+    if (ici !== chapIci) { chapIci = ici; chap.forEach(function (c, i) { c.bouton.classList.toggle("ici", i === ici); c.bouton.classList.toggle("fait", i < ici); c.trait.classList.toggle("ici", i === ici); c.trait.classList.toggle("fait", i < ici); }); }
+    somm.classList.toggle("sombre", barre.classList.contains("sombre") && !ouvert);
+  }, 200);
 
   mesurer(); try { var yy = +sessionStorage.getItem("pilote-y"); if (yy > 0) { force = true; scrollTo(0, yy); setTimeout(function () { force = false; }, 200); } } catch (e) {}
   var dl = innerWidth, dh = innerHeight;

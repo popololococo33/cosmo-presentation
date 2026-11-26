@@ -8,7 +8,7 @@
 <meta name="description" content="Présentation du logiciel de gestion Pilote.">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="icone.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css?v=14">
+<link rel="stylesheet" href="style.css?v=16">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -56,6 +56,10 @@
   </ol>
 </div>
 
+<nav class="sommaire" id="sommaire" aria-label="Sommaire">
+  <div class="trame" id="trame" aria-hidden="true"></div>
+  <div class="dock" id="dock"></div>
+</nav>
 <main>
 
 <!-- 0. Ouverture -->
@@ -64,7 +68,7 @@
     <div class="haut-texte">
       <h1>Présentation du logiciel Pilote</h1>
     </div>
-    <div class="fenetre3d" id="haut-fenetre"><div class="fenetre"><img src="img/accueil.jpg?v=14" width="1440" height="640" alt="Le tableau de bord de Pilote, avec des données d’exemple"><i class="rai"></i></div></div>
+    <div class="fenetre3d" id="haut-fenetre"><div class="fenetre"><img src="img/accueil.jpg?v=16" width="1440" height="640" alt="Le tableau de bord de Pilote, avec des données d’exemple"><i class="rai"></i></div></div>
   </div>
 </section>
 
@@ -129,8 +133,8 @@
       <h2 data-a="0.8 0.86"><span>Word et Excel restent là</span></h2>
     </div>
     <div class="gouffre">
-      <div class="fenetre3d milieu" id="rch"><div class="fenetre"><img loading="lazy" src="img/accueil.jpg?v=14" width="1440" height="640" alt="L’écran d’accueil de Pilote"></div></div>
-      <div class="fenetre3d milieu reel" id="rch2" data-zoom="58 40 1.5"><div class="fenetre"><img loading="lazy" src="img/recherche-resultats.jpg?v=14" width="1440" height="900" alt="Les résultats de la recherche « Martin » : la fiche du client, ses numéros, ses actions et ses factures"></div></div>
+      <div class="fenetre3d milieu" id="rch"><div class="fenetre"><img loading="lazy" src="img/accueil.jpg?v=16" width="1440" height="640" alt="L’écran d’accueil de Pilote"></div></div>
+      <div class="fenetre3d milieu reel" id="rch2" data-zoom="58 40 1.5"><div class="fenetre"><img loading="lazy" src="img/recherche-resultats.jpg?v=16" width="1440" height="900" alt="Les résultats de la recherche « Martin » : la fiche du client, ses numéros, ses actions et ses factures"></div></div>
       <div class="carte docword" id="docword"><div class="d-tete"><svg><use href="#i-dossier"/></svg><div><b>Chantier Durand</b></div></div>
         <div class="ligne-doc"><span class="ico w">W</span><div><b>compte-rendu-reunion.docx</b></div><span class="btn petit">Modifier dans Word</span></div>
         <div class="ligne-doc"><span class="ico x">X</span><div><b>metre-facade.xlsx</b></div><span class="btn petit gris">Modifier dans Excel</span></div>
@@ -173,7 +177,7 @@
       <h2 data-a="0.02 0.1" data-z="0.5 0.54"><span>La fiche client</span></h2>
       <h2 data-a="0.56 0.62"><span>L’historique</span></h2>
     </div>
-    <div class="gouffre"><div class="fenetre3d milieu reel" id="cr1" data-zoom="52 34 1.7"><div class="fenetre"><img loading="lazy" src="img/C04-fiche-client.jpg?v=14" width="1440" height="900" alt="La fiche du client Martin dans Pilote"></div></div><div class="fenetre3d milieu reel" id="cr2" data-zoom="60 78 1.65"><div class="fenetre"><img loading="lazy" src="img/C05-historique.jpg?v=14" width="1440" height="900" alt="L’onglet Actions de la fiche du client"></div></div></div>
+    <div class="gouffre"><div class="fenetre3d milieu reel" id="cr1" data-zoom="52 34 1.7"><div class="fenetre"><img loading="lazy" src="img/C04-fiche-client.jpg?v=16" width="1440" height="900" alt="La fiche du client Martin dans Pilote"></div></div><div class="fenetre3d milieu reel" id="cr2" data-zoom="60 78 1.65"><div class="fenetre"><img loading="lazy" src="img/C05-historique.jpg?v=16" width="1440" height="900" alt="L’onglet Actions de la fiche du client"></div></div></div>
   </div>
 </section>
 
@@ -188,9 +192,9 @@
         <div class="ligne-doc neuf" id="photo-arrivee"><span class="ico ph"><svg><use href="#i-photo"/></svg></span><div><b>photo-facade.jpg</b></div></div>
       </div>
       <div class="tel grand-tel" id="tel2"><div class="ecran ecrans">
-        <div class="e img" id="e1"><img src="img/C08-mobile-stock.jpg?v=14" alt="Le stock sur téléphone"></div>
-        <div class="e img" id="e2"><img src="img/C08b-mobile-fiche-contact.jpg?v=14" alt="La fiche du client sur téléphone"></div>
-        <div class="e img" id="e3"><img src="img/C10-mobile-scan.jpg?v=14" alt="Prendre un document en photo sur téléphone"></div>
+        <div class="e img" id="e1"><img src="img/C08-mobile-stock.jpg?v=16" alt="Le stock sur téléphone"></div>
+        <div class="e img" id="e2"><img src="img/C08b-mobile-fiche-contact.jpg?v=16" alt="La fiche du client sur téléphone"></div>
+        <div class="e img" id="e3"><img src="img/C10-mobile-scan.jpg?v=16" alt="Prendre un document en photo sur téléphone"></div>
         <div class="e" id="e4"><span class="okrond"><svg><use href="#i-ok"/></svg></span><b>Photo ajoutée</b><p>Dossier Chantier Durand</p></div>
       </div></div>
       <div class="photo-vol" id="photo-vol"><svg><use href="#i-photo"/></svg></div>
@@ -386,7 +390,7 @@
       <h2 data-a="0.02 0.1" data-z="0.5 0.54"><span>Le dossier du chantier</span></h2>
       <h2 data-a="0.56 0.62"><span>Les échanges</span></h2>
     </div>
-    <div class="gouffre"><div class="fenetre3d milieu reel" id="er1" data-zoom="40 22 1.55"><div class="fenetre"><img loading="lazy" src="img/C18-dossier.jpg?v=14" width="1440" height="900" alt="Le dossier Chantier Martin dans Pilote"></div></div><div class="fenetre3d milieu reel" id="er2" data-zoom="62 70 1.75"><div class="fenetre"><img loading="lazy" src="img/C19-dossier-echanges.jpg?v=14" width="1440" height="900" alt="Les échanges du dossier"></div></div></div>
+    <div class="gouffre"><div class="fenetre3d milieu reel" id="er1" data-zoom="40 22 1.55"><div class="fenetre"><img loading="lazy" src="img/C18-dossier.jpg?v=16" width="1440" height="900" alt="Le dossier Chantier Martin dans Pilote"></div></div><div class="fenetre3d milieu reel" id="er2" data-zoom="62 70 1.75"><div class="fenetre"><img loading="lazy" src="img/C19-dossier-echanges.jpg?v=16" width="1440" height="900" alt="Les échanges du dossier"></div></div></div>
   </div>
 </section>
 
@@ -422,8 +426,8 @@
       <h2 data-a="0.74 0.79"><span>La facture</span></h2>
     </div>
     <div class="gouffre">
-      <div class="fenetre3d milieu" id="p1"><div class="fenetre"><img loading="lazy" src="img/accueil.jpg?v=14" width="1440" height="640" alt="Le tableau de bord"></div></div>
-      <div class="fenetre3d milieu" id="p2"><div class="fenetre"><img loading="lazy" src="img/stats.jpg?v=14" width="1440" height="900" alt="L’écran des statistiques : chiffre d’affaires, factures, panier moyen, marge estimée"></div></div>
+      <div class="fenetre3d milieu" id="p1"><div class="fenetre"><img loading="lazy" src="img/accueil.jpg?v=16" width="1440" height="640" alt="Le tableau de bord"></div></div>
+      <div class="fenetre3d milieu" id="p2"><div class="fenetre"><img loading="lazy" src="img/stats.jpg?v=16" width="1440" height="900" alt="L’écran des statistiques : chiffre d’affaires, factures, panier moyen, marge estimée"></div></div>
       <div class="feuille grande" id="p3"><div class="f-tete"><b class="maj" data-nom="societe">Votre entreprise</b><span>Facture FA20260580</span></div><table><tbody><tr><td>Déplacement</td><td>160 €</td></tr><tr><td>Recherche de panne</td><td>300 €</td></tr><tr><td>Pompe de relevage</td><td>640 €</td></tr><tr><td>Main-d’œuvre</td><td>500 €</td></tr></tbody><tfoot><tr><td>Total TTC</td><td>1 920 €</td></tr></tfoot></table><span class="tampon" data-a="0.86 0.92 pop">Soldée</span></div>
     </div>
   </div>
@@ -513,7 +517,7 @@
       <span class="sure" data-a="0.3 0.36 pop">Trouvée</span>
       <div class="ecritures" data-a="0.44 0.52"><div><span>512 Banque</span><b>1 920,00</b></div><div><span>411 Martin</span><b>1 920,00</b></div></div>
     </div>
-    <div class="fenetre3d milieu" id="f-banque"><div class="fenetre"><img loading="lazy" src="img/banque.jpg?v=14" width="1440" height="900" alt="L’écran Banque : chaque ligne du relevé avec sa proposition"><i class="rai"></i></div></div>
+    <div class="fenetre3d milieu" id="f-banque"><div class="fenetre"><img loading="lazy" src="img/banque.jpg?v=16" width="1440" height="900" alt="L’écran Banque : chaque ligne du relevé avec sa proposition"><i class="rai"></i></div></div>
   </div>
 </section>
 
@@ -524,7 +528,7 @@
       <svg viewBox="0 0 800 6" preserveAspectRatio="none"><path class="rail" d="M0 3H800"/><path class="lum" data-trace="0.1 0.5" pathLength="1" d="M0 3H800"/></svg>
       <div data-a="0.12 0.2 pop"><b>1<sup>er</sup> rappel</b></div><div data-a="0.26 0.34 pop"><b>2<sup>e</sup> relance</b></div><div data-a="0.4 0.48 pop"><b>Mise en demeure</b></div>
     </div>
-    <div class="fenetre3d milieu" id="f-relances"><div class="fenetre"><img loading="lazy" src="img/relances.jpg?v=14" width="1440" height="900" alt="L’écran Relances des impayés"><i class="rai"></i></div></div>
+    <div class="fenetre3d milieu" id="f-relances"><div class="fenetre"><img loading="lazy" src="img/relances.jpg?v=16" width="1440" height="900" alt="L’écran Relances des impayés"><i class="rai"></i></div></div>
   </div>
 </section>
 
@@ -546,6 +550,6 @@
 </section>
 </main>
 <p class="note">Captures et exemples réalisés avec des données fictives.</p>
-<script src="page.js?v=14"></script>
+<script src="page.js?v=16"></script>
 </body>
 </html>
