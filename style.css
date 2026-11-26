@@ -251,3 +251,5 @@ h1{font-size:clamp(38px,6.1vw,92px)}
 .date b{font-size:clamp(20px,2.1vw,31px)}
 
 .groupe svg{width:28px;height:28px;color:var(--bleu)}.groupe{border:0;background:#fff;box-shadow:0 0 0 1px rgba(15,23,42,.07),0 28px 60px -30px rgba(23,50,120,.45)}
+
+.c-logo{width:26px;height:26px;padding:0;border-radius:7px;background:#0b0b0f;color:#fff}.barre.sombre .c-logo{background:#fff;color:#0b0b0f}
