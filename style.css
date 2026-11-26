@@ -376,3 +376,5 @@ h1{font-size:clamp(38px,6.1vw,92px)}
 .regards b{font-size:clamp(22px,2.3vw,34px)}
 .coffre b{font-size:clamp(18px,1.8vw,26px)}
 @media (max-width:820px){.dit h2{font-size:32px}.titres h2{font-size:28px}.liste-geante{font-size:34px}}
+#recherche #rch2{width:min(1120px,92%,calc((100vh - 330px)*1.6))!important;margin-top:16px}
+@media (max-width:820px){#recherche #rch2{width:100%!important}}
